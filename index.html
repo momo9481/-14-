@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>雅思写作表达默写(14个高频话题)</title>
     <style>
+        /* 基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -12,10 +13,177 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        /* 翻译练习返回按钮样式 */
+        #back-from-translation {
+            display: block;
+            margin: 20px auto;
+            width: 200px;
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        
+        /* 默写练习返回按钮保持原有样式 */
+        #back-from-practice {
+            display: inline-block;
+            margin: 20px 10px;
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        /* 修复"显示答案"按钮过大问题 */
+        #show-practice-answers {
+            /* 强制重置背景色 */
+            background-color: #3498db !important;
+            background-image: none !important;
+            
+            /* 文字颜色 */
+            color: white !important;
+            
+            /* 边框重置 */
+            border: none !important;
+            box-shadow: none !important;
+            
+            /* 尺寸和内边距 */
+            padding: 12px 25px !important;
+            height: 48px !important;
+            min-height: 48px !important;
+            
+            /* 文字样式 */
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            text-shadow: none !important;
+            
+            /* 交互效果 */
+            cursor: pointer !important;
+            transition: background-color 0.3s !important;
+            
+            /* 布局 */
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        /* 确保不会被其他样式覆盖 */
+        #practice-page #show-practice-answers,
+        #practice-page #show-practice-answers:hover,
+        #practice-page #show-practice-answers:active,
+        #practice-page #show-practice-answers:focus {
+            background-color: #3498db !important;
+            color: white !important;
+        }
+
+        /* 确保不会被其他样式覆盖 */
+        #practice-page #show-practice-answers {
+            height: 48px !important;
+            min-height: 48px !important;
+            font-size: 1rem !important;
+            padding: 12px 25px !important;
+        }
+        /* 按钮不对齐快速修复 */
+        #practice-page .buttons {
+            display: flex;
+            align-items: center;  /* 关键：垂直居中对齐 */
+            justify-content: center;
+        }
+
+        #practice-page .buttons button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            line-height: normal;  /* 取消行高影响 */
+        }
         body {
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
+        }
+        
+        /* 主容器布局 */
+        .app-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* 统一所有蓝色按钮样式 */
+            .primary-btn,
+            .buttons button[type="button"],
+            .buttons button.primary {
+                background-color: #3498db;
+                color: white;
+                border: none;
+                padding: 12px 25px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1rem;
+                font-weight: 600;
+                transition: background-color 0.3s;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                height: 48px;
+                min-height: 48px;
+            }
+
+
+        /* 移除可能覆盖样式的异常规则 */
+        button[style*="background-color"],
+        button[style*="background"],
+        button[style*="color"] {
+            all: unset !important;
+        }
+
+        /* 左侧标签栏 */
+        .sidebar {
+            width: 200px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        
+        .sidebar-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-left: 4px solid transparent;
+        }
+        
+        .sidebar-item:hover {
+            background-color: #34495e;
+        }
+        
+        .sidebar-item.active {
+            background-color: #3498db;
+            border-left-color: #f1c40f;
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100vh;
         }
         
         .container {
@@ -24,6 +192,7 @@
             padding: 20px;
         }
         
+        /* 公共页面样式 */
         header {
             background-color: #2c3e50;
             color: white;
@@ -52,8 +221,9 @@
             display: block;
         }
         
+        /* 词汇列表页面 */
         .vocabulary-list {
-            max-height: 600px;
+            max-height: 65vh;
             overflow-y: auto;
             margin-bottom: 20px;
         }
@@ -93,41 +263,17 @@
             font-weight: 500;
         }
         
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #2980b9;
-        }
-        
-        button.secondary {
-            background-color: #95a5a6;
-        }
-        
-        button.secondary:hover {
-            background-color: #7f8c8d;
+        /* 默写练习页面 */
+        #practice-table-container {
+            max-height: 65vh;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            position: relative;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
         }
         
         th, td {
@@ -139,6 +285,9 @@
         th {
             background-color: #f2f2f2;
             font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
         
         tr:nth-child(even) {
@@ -153,21 +302,11 @@
             font-size: 1rem;
         }
         
-        .correct-result {
-            background-color: #d5f4e6;
-            color: #27ae60;
-        }
-        
-        .incorrect-result {
-            background-color: #fadbd8;
-            color: #e74c3c;
-        }
-        
-        .result {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 4px;
-            display: none;
+        /* 翻译练习页面 */
+        #translation-exercises {
+            max-height: 65vh;
+            overflow-y: auto;
+            margin-bottom: 20px;
         }
         
         .sentence-item {
@@ -197,15 +336,28 @@
             resize: vertical;
         }
         
+        /* 翻译练习答案显示样式 */
         .sentence-answer {
             display: none;
             background-color: #f8f9fa;
             padding: 12px;
             border-left: 3px solid #3498db;
-            border-radius: 0 4px 4px 0;
             margin-top: 10px;
+            border-radius: 0 4px 4px 0;
         }
         
+        /* 移除翻译练习底部按钮 */
+        #translation-page .buttons {
+            justify-content: center;
+        }
+        
+        #translation-page .buttons button:not(#back-from-translation) {
+            display: none;
+        }
+        
+
+
+        /* 公共组件 */
         .page-title {
             font-size: 1.4rem;
             margin-bottom: 20px;
@@ -229,7 +381,101 @@
             transition: width 0.3s;
         }
         
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        button.secondary {
+            background-color: #95a5a6;
+        }
+        
+        button.secondary:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .correct-result {
+            background-color: #d5f4e6;
+            color: #27ae60;
+        }
+        
+        .incorrect-result {
+            background-color: #fadbd8;
+            color: #e74c3c;
+        }
+        
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #ecf0f1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: #3498db;
+            border-radius: 4px;
+        }
+        
+        /* 移动端适配 */
         @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                max-height: 150px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                white-space: nowrap;
+                padding: 10px 0;
+                position: relative;
+            }
+            
+            .sidebar-item {
+                display: inline-block;
+                width: auto;
+                white-space: nowrap;
+            }
+            
+            .main-content {
+                height: auto;
+                overflow-y: visible;
+            }
+            
+            .vocabulary-list,
+            #practice-table-container,
+            #translation-exercises {
+                max-height: 60vh;
+            }
+            
             .container {
                 padding: 10px;
             }
@@ -250,155 +496,146 @@
             th, td {
                 padding: 8px 10px;
             }
-        }
-             /* 新增响应式样式 */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            header {
-                padding: 15px 0;
-                margin-bottom: 15px;
-            }
-            
-            h1 {
-                font-size: 1.4rem;
-            }
-            
-            .page {
-                padding: 15px;
-            }
-            
-            .vocabulary-list {
-                max-height: none;
-                overflow-y: visible;
-            }
-            
-            .buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            button {
-                width: 100%;
-                padding: 10px;
-            }
-            
-            table {
-                font-size: 0.9rem;
-            }
-            
-            th, td {
-                padding: 8px;
-                font-size: 0.9rem;
-            }
-            
-            input[type="text"] {
-                padding: 8px;
-            }
-            
-            .example, .translation, .result, .sentence-answer {
-                font-size: 0.9rem;
-                padding: 8px;
-            }
-            
-            .sentence-input {
-                min-height: 60px;
-                padding: 8px;
-            }
-            
-            .page-title {
-                font-size: 1.2rem;
+
+            #show-practice-answers {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                min-height: 44px;
             }
         }
         
-        @media (max-width: 480px) {
-            .expression {
-                font-size: 1rem;
-            }
-            
-            .meaning {
-                font-size: 0.9rem;
-            }
-            
-            table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-            
-            .sentence-prompt {
-                font-size: 0.9rem;
-            }
+        /* 翻译练习答案样式 */
+        .sentence-actions {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+        
+        .show-answer-btn {
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 4px 8px;
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+        
+        .show-answer-btn:hover {
+            color: #2980b9;
+        }
+        
+        .sentence-answer {
+            display: none;
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-left: 3px solid #3498db;
+            border-radius: 0 4px 4px 0;
+            margin-top: 10px;
+        }
+        
+        .sentence-item {
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #eee;
+            margin-bottom: 20px;
+        }
+        
+        .sentence-item:last-child {
+            border-bottom: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>【主题一】 Education 教育</h1>
-            <p>雅思写作表达默写(14个高频话题)</p>
-        </header>
-        
-        <!-- 词汇列表页面 -->
-        <div id="vocabulary-page" class="page active">
-            <div class="page-title">表达学习</div>
-            <div class="progress-bar">
-                <div class="progress" id="vocab-progress"></div>
-            </div>
-            <div class="vocabulary-list" id="vocabulary-list">
-                <!-- 词汇内容将通过JavaScript动态生成 -->
-            </div>
-            <div class="buttons">
-                <button id="practice-btn">默写词组</button>
-                <button id="translation-btn">翻译练习</button>
-            </div>
+    <div class="app-container">
+        <!-- 左侧标签栏 -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-item active" data-topic="education">教育类</div>
+            <div class="sidebar-item" data-topic="work">职场类</div>
+            <div class="sidebar-item" data-topic="environment">环境类</div>
+            <div class="sidebar-item" data-topic="culture">文化类</div>
+            <div class="sidebar-item" data-topic="health">健康类</div>
+            <div class="sidebar-item" data-topic="technology">科技类</div>
+            <div class="sidebar-item" data-topic="government">政府类</div>
+            <div class="sidebar-item" data-topic="crime">犯罪类</div>
+            <div class="sidebar-item" data-topic="media">媒体类</div>
+            <div class="sidebar-item" data-topic="society">社会类</div>
+            <div class="sidebar-item" data-topic="business">商业类</div>
+            <div class="sidebar-item" data-topic="sport">运动类</div>
+            <div class="sidebar-item" data-topic="cosmos">太空类</div>
+            <div class="sidebar-item" data-topic="globalization">全球化</div>
         </div>
         
-        <!-- 默写练习页面 -->
-        <div id="practice-page" class="page">
-            <div class="page-title">默写练习</div>
-            <div class="progress-bar">
-                <div class="progress" id="practice-progress"></div>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th width="10%">序号</th>
-                        <th width="45%">中文表达</th>
-                        <th width="45%">我的表达</th>
-                    </tr>
-                </thead>
-                <tbody id="practice-table">
-                    <!-- 默写表格内容将通过JavaScript动态生成 -->
-                </tbody>
-            </table>
-            <div class="buttons">
-                <button id="back-from-practice" class="secondary">返回上一页</button>
-                <button id="show-practice-answers">显示答案</button>
-            </div>
-        </div>
-        
-        <!-- 翻译练习页面 -->
-        <div id="translation-page" class="page">
-            <div class="page-title">翻译练习</div>
-            <div class="progress-bar">
-                <div class="progress" id="translation-progress"></div>
-            </div>
-            <div id="translation-exercises">
-                <!-- 翻译练习内容将通过JavaScript动态生成 -->
-            </div>
-            <div class="buttons">
-                <button id="back-from-translation" class="secondary">返回上一页</button>
-                <button id="show-translation-answers">显示答案</button>
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <div class="container">
+                <header>
+                    <h1>雅思写作表达默写(14个高频话题)</h1>
+                    <p id="current-topic">主题: Education 教育</p>
+                </header>
+                
+                <!-- 词汇列表页面 -->
+                <div id="vocabulary-page" class="page active">
+                    <div class="page-title">词汇列表</div>
+                    <div class="progress-bar">
+                        <div class="progress" id="vocab-progress"></div>
+                    </div>
+                    <div class="vocabulary-list" id="vocabulary-list">
+                        <!-- 词汇内容将通过JavaScript动态生成 -->
+                    </div>
+                    <div class="buttons">
+                        <button id="practice-btn">默写词组</button>
+                        <button id="translation-btn">翻译练习</button>
+                    </div>
+                </div>
+                
+                <!-- 默写练习页面 -->
+                <div id="practice-page" class="page">
+                    <div class="page-title">默写练习</div>
+                    <div class="progress-bar">
+                        <div class="progress" id="practice-progress"></div>
+                    </div>
+                    <div id="practice-table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th width="10%">序号</th>
+                                    <th width="45%">中文表达</th>
+                                    <th width="45%">我的表达</th>
+                                </tr>
+                            </thead>
+                            <tbody id="practice-table">
+                                <!-- 默写表格内容将通过JavaScript动态生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="buttons">
+                        <button id="back-from-practice" class="secondary">返回上一页</button>
+                        <button id="show-practice-answers">显示答案</button>
+                    </div>
+                </div>
+                
+                <!-- 翻译练习页面 -->
+                <div id="translation-page" class="page">
+                    <div class="page-title">翻译练习</div>
+                    <div class="progress-bar">
+                        <div class="progress" id="translation-progress"></div>
+                    </div>
+                    <div id="translation-exercises">
+                        <!-- 翻译练习内容将通过JavaScript动态生成 -->
+                    </div>
+                    <div class="buttons">
+                        <button id="back-from-translation" class="secondary">返回上一页</button>
+                        <button id="show-translation-answers">显示答案</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 词汇数据
-        const vocabularyData = [
+        // 词汇数据 - 教育类示例
+        const educationData = [
             {
                 expression: "support lifelong learning",
                 meaning: "支持终身学习",
@@ -413,25 +650,25 @@
             },
             {
                 expression: "promote inclusive education",
-                meaning: "推广全纳教育（全纳教育：让特殊需求学生、弱势群体学生与普通学生共同接受适宜的教育）",
+                meaning: "推广包容性教育",
                 example: "Schools must promote inclusive education to ensure students with disabilities receive equal access to quality learning opportunities.",
-                translation: "学校必须推广全纳教育，确保残疾学生平等获得优质学习机会。"
+                translation: "学校必须推广包容性教育，确保残疾学生平等获得优质学习机会。"
             },
             {
-                expression: "STEM education",
-                meaning: "理科教育/STEM教育（STEM：科学Science、技术Technology、工程Engineer、数学Mathematics）",
-                example: "Investing in STEM education is crucial for nurturing future innovators who can drive progress in science, technology, engineering, and mathematics.",
-                translation: "投资STEM教育对培养未来能推动科学、技术、工程和数学领域进步的创新者至关重要。"
+                expression: "liberal education",
+                meaning: "人文教育",
+                example: "With AI taking over more routine business and techical tasks, experts believe that the value of liberal education is set to rise.",
+                translation: "随着人工智能接管越来越多的常规业务和技术任务，专家们表示，人文教育的价值将会上升。"
             },
             {
                 expression: "vocational training",
                 meaning: "职业培训",
-                example: "Vocational training programs should be expanded to bridge the gap between academic learning and industry demands for skilled workers.",
+                example: "Vocational training programs should be expanded to bridge the gap between academic learning and industry's demands for skilled workers.",
                 translation: "应扩大职业培训项目，以弥合学术学习与行业对技能人才需求之间的差距。"
             },
             {
                 expression: "conduct standardized tests",
-                meaning: "进行标准化测试（标准化测试：采用统一命题、评分标准的考试方式，评估学生学习水平或教学效果，比如高考、雅思、托福等）",
+                meaning: "进行标准化测试",
                 example: "Educational authorities often conduct standardized tests to evaluate the overall academic performance of students across regions.",
                 translation: "教育当局常进行标准化测试，以评估各地区学生的整体学业表现。"
             },
@@ -575,18 +812,2436 @@
             },
             {
                 expression: "promote digital literacy",
-                meaning: "促进数字素养（数字素养：培养学生安全、有效使用数字设备与网络资源的能力，适应数字时代需求）",
+                meaning: "促进数字素养",
                 example: "Schools must promote digital literacy to help students navigate the internet safely and use technology responsibly.",
                 translation: "学校必须促进数字素养，帮助学生安全上网并负责任地使用技术。"
             }
         ];
 
-        // 翻译练习句子
-        const translationSentences = [
+        // 词汇数据 - 职场类示例
+        const workData = [
+            {   
+            "expression": "job burnout",
+            "meaning": "职业倦怠",
+            "example": "Prolonged excessive workload and lack of work-life balance often lead to job burnout among professionals in high-stress industries like finance and healthcare.",
+            "translation": "长期过重的工作量和缺乏工作与生活的平衡，常导致金融和医疗等高压力行业的专业人士出现职业倦怠。"
+            },
+            {
+            "expression": "gender pay gap",
+            "meaning": "性别薪资差距",
+            "example": "Closing the gender pay gap requires governments to enforce equal pay legislation and companies to conduct regular salary audits to eliminate discriminatory practices.",
+            "translation": "缩小性别薪资差距需要政府执行同工同酬立法，以及企业定期进行薪资审计以消除歧视性做法。"
+            },
+            {
+            "expression": "remote work",
+            "meaning": "远程工作",
+            "example": "The widespread adoption of remote work during the COVID-19 pandemic has demonstrated its potential to enhance productivity while reducing commuting costs for employees.",
+            "translation": "新冠疫情期间远程工作的广泛采用，证明了其在提高生产力同时降低员工通勤成本方面的潜力。"
+            },
+            {
+            "expression": "resolve workplace conflicts",
+            "meaning": "解决职场冲突",
+            "example": "Effective mediation and open communication channels are essential to resolve workplace conflicts and maintain a harmonious team environment.",
+            "translation": "有效的调解和开放的沟通渠道对于解决职场冲突和维持和谐的团队环境至关重要。"
+            },
+            {
+            "expression": "enact labor regulations",
+            "meaning": "制定劳动法规",
+            "example": "To protect vulnerable workers, governments must enact labor regulations that set minimum wage standards and prohibit unfair dismissal without just cause.",
+            "translation": "为保护弱势工人，政府必须制定劳动法规，设定最低工资标准并禁止无正当理由的不公平解雇。"
+            },
+            {
+            "expression": "work-life balance",
+            "meaning": "工作与生活平衡",
+            "example": "Companies that prioritize work-life balance by offering flexible hours and paid parental leave tend to have higher employee retention rates.",
+            "translation": "通过提供灵活工时和带薪育儿假来优先考虑工作与生活平衡的企业，往往拥有更高的员工留存率。"
+            },
+            {
+            "expression": "corporate culture",
+            "meaning": "企业文化",
+            "example": "A positive corporate culture that values transparency and employee well-being can significantly boost job satisfaction and team morale.",
+            "translation": "重视透明度和员工福祉的积极企业文化，能显著提升工作满意度和团队士气。"
+            },
+            {
+            "expression": "workplace diversity",
+            "meaning": "职场多样性",
+            "example": "Promoting workplace diversity not only fosters innovation but also helps companies better understand and serve a broader range of customers.",
+            "translation": "促进职场多样性不仅能培养创新，还能帮助企业更好地理解和服务更广泛的客户群体。"
+            },
+            {
+            "expression": "employee motivation",
+            "meaning": "员工积极性",
+            "example": "Recognition of achievements and opportunities for career growth are key factors in sustaining employee motivation and engagement.",
+            "translation": "对成就的认可和职业成长机会是维持员工积极性和参与度的关键因素。"
+            },
+            {
+            "expression": "workplace safety",
+            "meaning": "职场安全",
+            "example": "Regular safety training and strict compliance with occupational health standards are critical to ensuring workplace safety in manufacturing facilities.",
+            "translation": "定期安全培训和严格遵守职业健康标准，对于确保制造工厂的职场安全至关重要。"
+            },
+            {
+            "expression": "foster team spirit",
+            "meaning": "培养团队精神",
+            "example": "Organizing team-building activities and encouraging collaborative problem-solving can effectively foster team spirit among colleagues.",
+            "translation": "组织团队建设活动和鼓励协作解决问题，能有效培养同事间的团队精神。"
+            },
+            {
+            "expression": "promote career development",
+            "meaning": "促进职业发展",
+            "example": "Companies should promote career development by offering mentorship programs and funding for professional certifications.",
+            "translation": "企业应通过提供导师计划和资助专业认证来促进员工的职业发展。"
+            },
+            {
+            "expression": "allocate tasks effectively",
+            "meaning": "有效分配任务",
+            "example": "Managers who allocate tasks effectively based on employees’ strengths and expertise can improve overall team productivity and reduce unnecessary stress.",
+            "translation": "根据员工优势和专业知识有效分配任务的管理者，能提高团队整体生产力并减少不必要的压力。"
+            },
+            {
+            "expression": "streamline collaborative processes",
+            "meaning": "简化协作流程",
+            "example": "Using project management tools like Asana or Trello can streamline collaborative processes and ensure clear communication among team members.",
+            "translation": "使用Asana或Trello等项目管理工具，能简化协作流程并确保团队成员间的清晰沟通。"
+            },
+            {
+            "expression": "provide vocational training",
+            "meaning": "提供职业培训",
+            "example": "To address skill gaps in the labor market, governments should provide vocational training programs tailored to high-demand industries such as renewable energy.",
+            "translation": "为解决劳动力市场的技能差距，政府应提供针对可再生能源等高需求行业的职业培训项目。"
+            },
+            {
+            "expression": "strengthen interdependence",
+            "meaning": "加强相互依赖",
+            "example": "Assigning cross-functional projects helps strengthen interdependence among departments, leading to more integrated and efficient organizational performance.",
+            "translation": "分配跨职能项目有助于加强部门间的相互依赖，从而提升组织的整体整合性和效率。"
+            },
+            {
+            "expression": "improve working conditions",
+            "meaning": "改善工作条件",
+            "example": "Investing in ergonomic office furniture and proper ventilation is essential to improve working conditions and reduce employee health issues.",
+            "translation": "投资符合人体工程学的办公家具和适当通风，对于改善工作条件和减少员工健康问题至关重要。"
+            },
+            {
+            "expression": "encourage innovative thinking",
+            "meaning": "鼓励创新思维",
+            "example": "Creating a culture that tolerates failure and rewards creative solutions can encourage innovative thinking among employees.",
+            "translation": "营造容忍失败并奖励创造性解决方案的文化，能鼓励员工的创新思维。"
+            },
+            {
+            "expression": "constructive communication",
+            "meaning": "建设性沟通",
+            "example": "Constructive communication, which focuses on specific issues rather than personal criticism, is key to resolving disagreements in the workplace.",
+            "translation": "专注于具体问题而非个人批评的建设性沟通，是解决职场分歧的关键。"
+            },
+            {
+            "expression": "enhance teamwork",
+            "meaning": "增强团队合作",
+            "example": "Regular feedback sessions and shared goal-setting can enhance teamwork by aligning individual efforts with collective objectives.",
+            "translation": "定期反馈会议和共同设定目标，能通过将个人努力与集体目标对齐来增强团队合作。"
+            },
+            {
+            "expression": "leverage diverse strengths",
+            "meaning": "利用不同优势",
+            "example": "Effective leaders leverage diverse strengths of team members to tackle complex challenges and drive innovation.",
+            "translation": "高效的领导者会利用团队成员的不同优势来应对复杂挑战并推动创新。"
+            },
+            {
+            "expression": "align team goals",
+            "meaning": "对齐团队目标",
+            "example": "To achieve organizational success, managers must align team goals with the company’s long-term strategic objectives.",
+            "translation": "为实现组织成功，管理者必须将团队目标与公司的长期战略目标对齐。"
+            },
+            {
+            "expression": "promote gender equality",
+            "meaning": "促进性别平等",
+            "example": "Companies can promote gender equality by implementing policies that ensure equal representation in leadership positions and eliminate bias in hiring.",
+            "translation": "企业可通过实施确保领导层性别平等代表权和消除招聘偏见的政策，来促进性别平等。"
+            },
+            {
+            "expression": "strengthen occupational safety",
+            "meaning": "加强职业安全",
+            "example": "Regular inspections and mandatory safety drills are necessary to strengthen occupational safety and prevent workplace accidents.",
+            "translation": "定期检查和强制性安全演练对于加强职业安全和预防职场事故是必要的。"
+            },
+            {
+                "expression": "develop leadership skills",
+                "meaning": "培养领导能力",
+                "example": "Participating in management training programs and taking on leadership roles in projects helps employees develop leadership skills.",
+                "translation": "参与管理培训项目和在项目中担任领导角色，有助于员工培养领导能力。"
+            },
+            {
+                "expression": "manage workload",
+                "meaning": "管理工作量",
+                "example": "Setting realistic deadlines and delegating tasks appropriately are effective strategies to manage workload and avoid burnout.",
+                "translation": "设定现实的截止日期和适当委派任务，是管理工作量和避免倦怠的有效策略。"
+            },
+            {
+                "expression": "facilitate cross-departmental collaboration",
+                "meaning": "促进跨部门协作",
+                "example": "Establishing inter-departmental task forces can facilitate cross-departmental collaboration and break down silos within an organization.",
+                "translation": "建立跨部门任务小组能促进跨部门协作，并打破组织内部的壁垒。"
+            },
+            {
+                "expression": "implement flexible work arrangements",
+                "meaning": "实施灵活工作安排",
+                "example": "To attract and retain top talent, many companies now implement flexible work arrangements such as compressed workweeks or hybrid work models.",
+                "translation": "为吸引和留住顶尖人才，许多企业现在实施灵活的工作安排，如压缩工作周或混合工作模式。"
+            },
+            {
+                "expression": "evaluate performance fairly",
+                "meaning": "公平评估绩效",
+                "example": "Using objective metrics and 360-degree feedback systems helps managers evaluate performance fairly and provide actionable insights for improvement.",
+                "translation": "使用客观指标和360度反馈系统，有助于管理者公平评估绩效并提供可操作的改进建议。"
+            },
+            {
+                "expression": "clarify roles and responsibilities",
+                "meaning": "明确角色和职责",
+                "example": "Clarifying roles and responsibilities at the start of a project prevents confusion and ensures that all team members understand their tasks.",
+                "translation": "在项目开始时明确角色和职责，可避免混乱并确保所有团队成员了解其任务。"
+            }
+
+    ];
+
+
+
+        // 词汇数据 - 环境类示例
+        const environmentData = [
+           {
+            "expression": "discharge chemical waste",
+            "meaning": "排放化学废物",
+            "example": "Many unregulated factories in developing regions discharge chemical waste into nearby water bodies without treatment, leading to severe water pollution and threatening aquatic life.",
+            "translation": "许多发展中地区的无监管工厂未经处理就向附近水体排放化学废物，导致严重的水污染并威胁水生生物。"
+            },
+            {
+            "expression": "environmental degradation",
+            "meaning": "环境恶化",
+            "example": "Rapid urbanization and deforestation have accelerated environmental degradation in tropical regions, reducing the planet’s carbon absorption capacity.",
+            "translation": "快速城市化和森林砍伐加速了热带地区的环境恶化，降低了地球的碳吸收能力。"
+            },
+            {
+            "expression": "take action on global warming",
+            "meaning": "针对全球变暖采取行动",
+            "example": "All nations must take immediate action on global warming by cutting greenhouse gas emissions and transitioning to clean energy.",
+            "translation": "所有国家必须通过减少温室气体排放和向清洁能源转型，立即针对全球变暖采取行动。"
+            },
+            {
+            "expression": "bio-degradable",
+            "meaning": "可生物降解的",
+            "example": "Governments should mandate the use of bio-degradable packaging to reduce persistent waste in landfills.",
+            "translation": "政府应强制使用可生物降解包装，以减少垃圾填埋场中的持久性废物。"
+            },
+            {
+            "expression": "deplete natural resources",
+            "meaning": "耗尽自然资源",
+            "example": "Overexploitation of coal and oil continues to deplete natural resources at an unsustainable rate.",
+            "translation": "煤炭和石油的过度开采正以不可持续的速度耗尽自然资源。"
+            },
+            {
+            "expression": "ozone layer depletion",
+            "meaning": "臭氧层损耗",
+            "example": "Past use of chlorofluorocarbons (CFCs) caused ozone layer depletion, increasing UV radiation exposure.",
+            "translation": "过去含氯氟烃（CFCs）的使用导致臭氧层损耗，增加了紫外线辐射暴露。"
+            },
+            {
+            "expression": "an ecological crisis",
+            "meaning": "生态危机",
+            "example": "Coral reef loss due to ocean acidification signals an ecological crisis requiring global intervention.",
+            "translation": "海洋酸化导致的珊瑚礁消失标志着一场需要全球干预的生态危机。"
+            },
+            {
+            "expression": "carbon footprint",
+            "meaning": "碳足迹",
+            "example": "Choosing public transport over private cars helps reduce individual carbon footprint.",
+            "translation": "选择公共交通而非私家车有助于减少个人碳足迹。"
+            },
+            {
+            "expression": "cut down on emissions",
+            "meaning": "减少排放",
+            "example": "Stricter regulations force industries to cut down on emissions of sulfur dioxide and nitrogen oxides.",
+            "translation": "更严格的法规迫使企业减少二氧化硫和氮氧化物的排放。"
+            },
+            {
+            "expression": "fight climate change",
+            "meaning": "应对气候变化",
+            "example": "Investing in solar and wind power is key to fight climate change and achieve carbon neutrality.",
+            "translation": "投资太阳能和风能是应对气候变化和实现碳中和的关键。"
+            },
+            {
+            "expression": "reduce dependence on fossil fuels",
+            "meaning": "减少对化石燃料的依赖",
+            "example": "Countries must reduce dependence on fossil fuels to ensure long-term environmental sustainability.",
+            "translation": "各国必须减少对化石燃料的依赖，以确保长期环境可持续性。"
+            },
+            {
+            "expression": "alleviate environmental problems",
+            "meaning": "缓解环境问题",
+            "example": "Reforestation projects alleviate environmental problems like soil erosion and air pollution.",
+            "translation": "植树造林项目缓解了土壤侵蚀和空气污染等环境问题。"
+            },
+            {
+            "expression": "throw one’s weight behind sth",
+            "meaning": "大力支持某事",
+            "example": "The UN should throw its weight behind global efforts to ban single-use plastics.",
+            "translation": "联合国应大力支持全球禁止一次性塑料的努力。"
+            },
+            {
+            "expression": "hold sb accountable for",
+            "meaning": "让某人对某事负责",
+            "example": "International bodies must hold corporations accountable for illegal logging and oil spills.",
+            "translation": "国际机构必须让企业对非法伐木和石油泄漏负责。"
+            },
+            {
+            "expression": "achieve sustainable development",
+            "meaning": "实现可持续发展",
+            "example": "Balancing economic growth and environmental protection is essential to achieve sustainable development.",
+            "translation": "平衡经济增长与环境保护对于实现可持续发展至关重要。"
+            },
+            {
+            "expression": "alternative energy sources",
+            "meaning": "替代能源",
+            "example": "Sunny countries should prioritize alternative energy sources like solar power.",
+            "translation": "阳光充足的国家应优先发展太阳能等替代能源。"
+            },
+            {
+            "expression": "food miles",
+            "meaning": "食物里程",
+            "example": "Choosing local food reduces food miles and associated carbon emissions.",
+            "translation": "选择本地食物减少了食物里程和相关碳排放。"
+            },
+            {
+            "expression": "captive breeding",
+            "meaning": "圈养繁殖",
+            "example": "Captive breeding saved the giant panda from extinction.",
+            "translation": "圈养繁殖拯救了大熊猫免于灭绝。"
+            },
+            {
+            "expression": "stem from",
+            "meaning": "源于",
+            "example": "Most environmental problems stem from deforestation, overfishing, and fossil fuel burning.",
+            "translation": "大多数环境问题源于森林砍伐、过度捕捞和化石燃料燃烧。"
+            },
+            {
+            "expression": "environmental impact assessment",
+            "meaning": "环境影响评估",
+            "example": "Developers must conduct an environmental impact assessment before building dams.",
+            "translation": "开发者在建造水坝前必须进行环境影响评估。"
+            },
+            {
+            "expression": "the greenhouse effect",
+            "meaning": "温室效应",
+            "example": "Human activities have intensified the greenhouse effect by increasing greenhouse gas concentrations.",
+            "translation": "人类活动通过增加温室气体浓度加剧了温室效应。"
+            },
+            {
+            "expression": "global warming",
+            "meaning": "全球变暖",
+            "example": "Global warming has raised sea levels, threatening coastal areas and small islands.",
+            "translation": "全球变暖导致海平面上升，威胁沿海地区和小岛屿国家。"
+            },
+            {
+            "expression": "habitat destruction",
+            "meaning": "栖息地破坏",
+            "example": "Habitat destruction from urban expansion is the main cause of biodiversity loss.",
+            "translation": "城市扩张导致的栖息地破坏是生物多样性下降的主要原因。"
+            },
+            {
+            "expression": "endangered species",
+            "meaning": "濒危物种",
+            "example": "Protected areas safeguard endangered species from human interference.",
+            "translation": "保护区保护濒危物种免受人类干扰。"
+            },
+            {
+            "expression": "on the brink of extinction",
+            "meaning": "濒临灭绝",
+            "example": "The Amur leopard is on the brink of extinction with fewer than 100 wild individuals left.",
+            "translation": "远东豹濒临灭绝，野外仅存不到100只个体。"
+            },
+            {
+            "expression": "renewable energy",
+            "meaning": "可再生能源",
+            "example": "Renewable energy like wind and hydro power reduces carbon emissions.",
+            "translation": "风能和水能等可再生能源减少了碳排放。"
+            },
+            {
+            "expression": "wind farms",
+            "meaning": "风力发电场",
+            "example": "Coastal wind farms are a popular source of clean energy.",
+            "translation": "沿海风力发电场是受欢迎的清洁能源来源。"
+            },
+            {
+            "expression": "environmentally friendly",
+            "meaning": "环保的",
+            "example": "Consumers should choose environmentally friendly products like reusable containers.",
+            "translation": "消费者应选择可重复使用容器等环保产品。"
+            },
+            {
+            "expression": "toxic waste",
+            "meaning": "有毒废物",
+            "example": "Improper toxic waste disposal contaminates soil and groundwater.",
+            "translation": "有毒废物的不当处理污染了土壤和地下水。"
+            },
+            {
+            "expression": "the green movement",
+            "meaning": "绿色运动",
+            "example": "The green movement raises public awareness and pushes for environmental policies.",
+            "translation": "绿色运动提高了公众意识并推动了环境政策变革。"
+            }
+    ];
+
+        // 词汇数据 - 文化类示例
+        const cultureData = [
+            {
+                "expression": "pass down traditional craftsmanship",
+                "meaning": "传承传统工艺",
+                "example": "Local governments should fund vocational training programs to pass down traditional craftsmanship, ensuring skills like batik-making are preserved for future generations.",
+                "translation": "地方政府应资助职业培训项目以传承传统工艺，确保蜡染等技艺为后代保留。"
+            },
+            {
+                "expression": "promote cultural inclusivity",
+                "meaning": "促进文化包容性",
+                "example": "Schools can promote cultural inclusivity by organizing events that showcase the traditions of all ethnic groups in the student body.",
+                "translation": "学校可通过举办展示学生群体中所有民族传统的活动，促进文化包容性。"
+            },
+            {
+                "expression": "drive cultural innovation",
+                "meaning": "推动文化创新",
+                "example": "Collaborations between traditional artisans and tech startups drive cultural innovation, resulting in digital artworks rooted in ancient techniques.",
+                "translation": "传统工匠与科技初创企业的合作推动文化创新，催生基于古老技艺的数字艺术作品。"
+            },
+            {
+                "expression": "cultural assimilation",
+                "meaning": "文化同化",
+                "example": "Cultural assimilation often occurs when immigrants adopt the language and customs of their host country to integrate into society.",
+                "translation": "当移民为融入社会而采纳东道国的语言和习俗时，文化同化往往会发生。"
+            },
+            {
+                "expression": "traditional values",
+                "meaning": "传统价值观",
+                "example": "Traditional values such as filial piety and collective responsibility remain central to social cohesion in many Asian societies.",
+                "translation": "孝道和集体责任等传统价值观，在许多亚洲社会仍是社会凝聚力的核心。"
+            },
+            {
+                "expression": "safeguard dialect diversity",
+                "meaning": "保护方言多样性",
+                "example": "Linguistic organizations advocate to safeguard dialect diversity by recording local dialects and developing educational materials.",
+                "translation": "语言组织通过记录地方方言和开发教育材料，倡导保护方言多样性。"
+            },
+            {
+                "expression": "multicultural society",
+                "meaning": "多元文化社会",
+                "example": "A multicultural society benefits from diverse perspectives, which enhance creativity and problem-solving in workplaces and communities.",
+                "translation": "多元文化社会得益于多样视角，这些视角提升了职场和社区的创造力与问题解决能力。"
+            },
+            {
+                "expression": "intangible heritage",
+                "meaning": "非物质文化遗产",
+                "example": "UNESCO’s Intangible Cultural Heritage List includes practices like Japanese tea ceremonies, recognizing their role in global cultural diversity.",
+                "translation": "联合国教科文组织非物质文化遗产名录包含日本茶道等实践，认可其在全球文化多样性中的作用。"
+            },
+            {
+                "expression": "cultural homogenization",
+                "meaning": "文化同质化",
+                "example": "The global spread of fast-food chains and Hollywood films has contributed to cultural homogenization across developing nations.",
+                "translation": "快餐连锁店和好莱坞电影的全球传播，导致发展中国家出现文化同质化现象。"
+            },
+            {
+                "expression": "folk traditions",
+                "meaning": "民间传统",
+                "example": "Folk traditions like Irish step dancing are not only forms of entertainment but also carriers of historical narratives and community identity.",
+                "translation": "爱尔兰踢踏舞等民间传统不仅是娱乐形式，也是历史叙事和社区身份的载体。"
+            },
+            {
+                "expression": "promote cultural exchange",
+                "meaning": "促进文化交流",
+                "example": "International art exhibitions promote cultural exchange by allowing artists from different countries to share their work and ideas.",
+                "translation": "国际艺术展通过让不同国家的艺术家分享作品和思想，促进文化交流。"
+            },
+            {
+                "expression": "preserve traditional customs",
+                "meaning": "保护传统习俗",
+                "example": "Local communities preserve traditional customs by celebrating annual festivals that involve ritualistic dances and traditional food.",
+                "translation": "当地社区通过庆祝包含仪式舞蹈和传统美食的年度节日，保护传统习俗。"
+            },
+            {
+                "expression": "enhance cultural identity",
+                "meaning": "增强文化身份认同",
+                "example": "Learning traditional music and dance helps young people enhance cultural identity, fostering a sense of belonging to their community.",
+                "translation": "学习传统音乐和舞蹈帮助年轻人增强文化身份认同，培养对社区的归属感。"
+            },
+            {
+                "expression": "bridge cultural gaps",
+                "meaning": "弥合文化鸿沟",
+                "example": "Cross-cultural communication workshops bridge cultural gaps by teaching participants to recognize and respect cultural differences.",
+                "translation": "跨文化交流工作坊通过教导参与者识别和尊重文化差异，弥合文化鸿沟。"
+            },
+            {
+                "expression": "protect cultural heritage",
+                "meaning": "保护文化遗产",
+                "example": "Governments must enforce strict laws to protect cultural heritage sites from illegal excavation and vandalism.",
+                "translation": "政府必须执行严格法律，保护文化遗产地免受非法挖掘和破坏。"
+            },
+            {
+                "expression": "encourage cultural diversity",
+                "meaning": "鼓励文化多样性",
+                "example": "Corporate diversity policies encourage cultural diversity by hiring employees from diverse backgrounds and promoting inclusive practices.",
+                "translation": "企业多样性政策通过雇佣不同背景的员工和推广包容性实践，鼓励文化多样性。"
+            },
+            {
+                "expression": "spread cultural values",
+                "meaning": "传播文化价值观",
+                "example": "Social media platforms allow individuals to spread cultural values globally, connecting people with shared beliefs across borders.",
+                "translation": "社交媒体平台让个人能在全球传播文化价值观，将拥有共同信仰的人跨边界联系起来。"
+            },
+            {
+                "expression": "integrate traditional and modern elements",
+                "meaning": "融合传统与现代元素",
+                "example": "Architects integrate traditional and modern elements in sustainable buildings, using traditional materials with contemporary design principles.",
+                "translation": "建筑师在可持续建筑中融合传统与现代元素，将传统材料与当代设计原则结合。"
+            },
+            {
+                "expression": "support local artisans",
+                "meaning": "支持本地工匠",
+                "example": "Fair-trade initiatives support local artisans by ensuring they receive fair wages for their handcrafted textiles and pottery.",
+                "translation": "公平贸易倡议通过确保本地工匠的手工纺织品和陶器获得合理报酬，支持他们。"
+            },
+            {
+                "expression": "revive traditional festivals",
+                "meaning": "复兴传统节日",
+                "example": "Community-led projects revive traditional festivals by organizing parades and workshops that teach young people about their cultural roots.",
+                "translation": "社区主导的项目通过组织游行和工作坊（向年轻人传授文化根源），复兴传统节日。"
+            },
+            {
+                "expression": "foster cross-cultural understanding",
+                "meaning": "促进跨文化理解",
+                "example": "International student exchange programs foster cross-cultural understanding by allowing students to live with host families and experience daily life in another country.",
+                "translation": "国际学生交换项目通过让学生与寄宿家庭同住并体验他国日常生活，促进跨文化理解。"
+            },
+            {
+                "expression": "maintain cultural uniqueness",
+                "meaning": "保持文化独特性",
+                "example": "Indigenous communities maintain cultural uniqueness by resisting external influences and preserving their traditional way of life.",
+                "translation": "土著社区通过抵制外部影响和保留传统生活方式，保持文化独特性。"
+            },
+            {
+                "expression": "promote cultural tourism",
+                "meaning": "促进文化旅游",
+                "example": "Countries like Thailand promote cultural tourism by offering guided tours of ancient temples and traditional villages.",
+                "translation": "泰国等国家通过提供古寺和传统村落的导览，促进文化旅游。"
+            },
+            {
+                "expression": "exchange cultural practices",
+                "meaning": "交流文化实践",
+                "example": "Artists from China and France exchange cultural practices by collaborating on mural projects that blend Chinese ink painting with French impressionism.",
+                "translation": "中法艺术家通过合作创作融合中国水墨画与法国印象派的壁画项目，交流文化实践。"
+            },
+            {
+                "expression": "strengthen cultural bonds",
+                "meaning": "加强文化联系",
+                "example": "Shared cultural heritage between Korea and Japan strengthens cultural bonds, leading to increased cooperation in arts and education.",
+                "translation": "韩日之间共享的文化遗产加强了文化联系，促进了艺术和教育领域的更多合作。"
+            },
+            {
+                "expression": "educate on cultural heritage",
+                "meaning": "开展文化遗产教育",
+                "example": "Museums educate the public on cultural heritage through interactive exhibits that explain the history and significance of artifacts.",
+                "translation": "博物馆通过解释文物历史和意义的互动展览，向公众开展文化遗产教育。"
+            },
+            {
+                "expression": "resist cultural homogenization",
+                "meaning": "抵制文化同质化",
+                "example": "Many nations resist cultural homogenization by funding local media outlets that promote domestic languages and traditions.",
+                "translation": "许多国家通过资助推广本土语言和传统的地方媒体，抵制文化同质化。"
+            },
+            {
+                "expression": "celebrate cultural festivals",
+                "meaning": "庆祝文化节日",
+                "example": "Cities around the world celebrate cultural festivals like the Chinese New Year, attracting tourists and fostering community spirit.",
+                "translation": "世界各地的城市庆祝中国新年等文化节日，吸引游客并培养社区精神。"
+            },
+            {
+                "expression": "develop cultural industries",
+                "meaning": "发展文化产业",
+                "example": "Governments can develop cultural industries by investing in film production and music festivals, creating jobs and boosting economic growth.",
+                "translation": "政府可通过投资电影制作和音乐节来发展文化产业，创造就业并促进经济增长。"
+            },
+            {
+                "expression": "enrich cultural life",
+                "meaning": "丰富文化生活",
+                "example": "Public art installations and community theaters enrich cultural life by providing accessible cultural experiences for all residents.",
+                "translation": "公共艺术装置和社区剧院通过为所有居民提供可及的文化体验，丰富文化生活。"
+            }
+        ];
+
+        // 词汇数据 - 健康类示例
+        const healthData = [
+            {
+            "expression": "diabetes",
+            "meaning": "糖尿病",
+            "example": "Governments should fund public awareness campaigns to educate citizens about the risk factors of diabetes, such as excessive sugar consumption and sedentary lifestyles.",
+            "translation": "政府应资助公共意识宣传活动，向公民普及糖尿病的风险因素，如过量糖分摄入和久坐生活方式。"
+            },
+            {
+            "expression": "mental health",
+            "meaning": "心理健康",
+            "example": "Schools should integrate mental health education into their curriculum to help students recognize early signs of emotional distress and seek timely professional support.",
+            "translation": "学校应将心理健康教育纳入课程，帮助学生识别情绪困扰的早期迹象并及时寻求专业支持。"
+            },
+            {
+            "expression": "chronic diseases",
+            "meaning": "慢性疾病",
+            "example": "Long-term exposure to air pollution and unhealthy dietary habits are major contributors to the rising prevalence of chronic diseases like heart disease and stroke.",
+            "translation": "长期暴露于空气污染和不健康饮食习惯是心脏病、中风等慢性疾病发病率上升的主要原因。"
+            },
+            {
+            "expression": "balanced diet",
+            "meaning": "均衡饮食",
+            "example": "A balanced diet rich in fruits, vegetables, whole grains, and lean proteins is essential for maintaining optimal physical health and preventing nutrient deficiencies.",
+            "translation": "富含水果、蔬菜、全谷物和瘦肉蛋白的均衡饮食对于维持最佳身体健康和预防营养缺乏至关重要。"
+            },
+            {
+            "expression": "sedentary lifestyle",
+            "meaning": "久坐生活方式",
+            "example": "Office workers who adopt a sedentary lifestyle are at a higher risk of developing obesity, back pain, and cardiovascular problems.",
+            "translation": "采用久坐生活方式的办公室职员患肥胖症、背痛和心血管疾病的风险更高。"
+            },
+            {
+            "expression": "public health",
+            "meaning": "公共卫生",
+            "example": "Investing in clean water supply and sanitation systems is a cornerstone of improving public health in developing countries.",
+            "translation": "投资清洁供水和卫生系统是改善发展中国家公共卫生的基石。"
+            },
+            {
+            "expression": "health literacy",
+            "meaning": "健康素养",
+            "example": "Health literacy programs empower individuals to make informed decisions about their health, such as choosing appropriate medications or recognizing symptoms of illness.",
+            "translation": "健康素养项目使个人能够就自身健康做出明智决策，例如选择合适的药物或识别疾病症状。"
+            },
+            {
+            "expression": "medical insurance",
+            "meaning": "医疗保险",
+            "example": "Universal medical insurance ensures that all citizens, regardless of their income level, have access to essential healthcare services without facing financial hardship.",
+            "translation": "全民医疗保险确保所有公民，无论收入水平如何，都能获得基本医疗服务而不面临经济困难。"
+            },
+            {
+            "expression": "stress management",
+            "meaning": "压力管理",
+            "example": "Practicing mindfulness meditation and regular physical exercise are effective stress management techniques for reducing workplace-related anxiety.",
+            "translation": "练习正念冥想和定期体育锻炼是减轻职场焦虑的有效压力管理技巧。"
+            },
+            {
+            "expression": "immune system",
+            "meaning": "免疫系统",
+            "example": "Adequate sleep and a nutrient-dense diet play a crucial role in strengthening the immune system to fight off infections and diseases.",
+            "translation": "充足睡眠和营养丰富的饮食对于增强免疫系统抵御感染和疾病至关重要。"
+            },
+            {
+            "expression": "obesity epidemic",
+            "meaning": "肥胖流行",
+            "example": "The global obesity epidemic has been linked to the widespread availability of high-calorie processed foods and reduced physical activity levels.",
+            "translation": "全球肥胖流行与高热量加工食品的广泛普及和体力活动水平下降有关。"
+            },
+            {
+            "expression": "promote physical activity",
+            "meaning": "促进体力活动",
+            "example": "Local authorities should build more parks and walking trails to promote physical activity among residents of all ages.",
+            "translation": "地方当局应建造更多公园和步行道，以促进各年龄段居民的体力活动。"
+            },
+            {
+            "expression": "reduce stress levels",
+            "meaning": "降低压力水平",
+            "example": "Employers can reduce stress levels among employees by offering flexible working hours and providing access to mental health counseling services.",
+            "translation": "雇主可通过提供灵活工作时间和心理健康咨询服务来降低员工的压力水平。"
+            },
+            {
+            "expression": "improve dietary habits",
+            "meaning": "改善饮食习惯",
+            "example": "Nutritionists recommend replacing sugary beverages with water and increasing fiber intake to improve dietary habits and prevent digestive issues.",
+            "translation": "营养师建议用白开水替代含糖饮料并增加纤维摄入，以改善饮食习惯和预防消化问题。"
+            },
+            {
+            "expression": "prevent chronic illnesses",
+            "meaning": "预防慢性疾病",
+            "example": "Regular health screenings and vaccinations are key strategies to prevent chronic illnesses like cancer and hypertension.",
+            "translation": "定期健康筛查和疫苗接种是预防癌症和高血压等慢性疾病的关键策略。"
+            },
+            {
+            "expression": "enhance mental well-being",
+            "meaning": "提升心理健康",
+            "example": "Engaging in social activities and pursuing hobbies can enhance mental well-being by reducing feelings of loneliness and isolation.",
+            "translation": "参与社交活动和培养爱好可通过减少孤独感来提升心理健康。"
+            },
+            {
+            "expression": "strengthen immune function",
+            "meaning": "增强免疫功能",
+            "example": "Vitamin C and zinc supplements are often recommended to strengthen immune function during cold and flu seasons.",
+            "translation": "维生素C和锌补充剂常被推荐用于在感冒和流感季节增强免疫功能。"
+            },
+            {
+            "expression": "increase health awareness",
+            "meaning": "提高健康意识",
+            "example": "Social media campaigns can effectively increase health awareness about the importance of regular handwashing and hygiene practices.",
+            "translation": "社交媒体宣传活动可有效提高公众对定期洗手和卫生习惯重要性的健康意识。"
+            },
+            {
+            "expression": "provide accessible healthcare",
+            "meaning": "提供可及的医疗保健",
+            "example": "Rural communities often lack access to medical facilities, so governments should provide accessible healthcare through mobile clinics and telemedicine services.",
+            "translation": "农村社区往往缺乏医疗设施，因此政府应通过流动诊所和远程医疗服务提供可及的医疗保健。"
+            },
+            {
+            "expression": "manage work-life balance",
+            "meaning": "管理工作与生活平衡",
+            "example": "Setting clear boundaries between work and personal life is essential to manage work-life balance and avoid burnout.",
+            "translation": "在工作和个人生活之间设定明确界限对于管理工作与生活平衡和避免倦怠至关重要。"
+            },
+            {
+            "expression": "encourage healthy behaviors",
+            "meaning": "鼓励健康行为",
+            "example": "Schools can encourage healthy behaviors by banning junk food in canteens and organizing daily physical education classes.",
+            "translation": "学校可通过禁止食堂销售垃圾食品和组织每日体育课来鼓励健康行为。"
+            },
+            {
+            "expression": "support mental health services",
+            "meaning": "支持心理健康服务",
+            "example": "Governments should allocate more funding to support mental health services, including crisis hotlines and community-based counseling centers.",
+            "translation": "政府应拨出更多资金支持心理健康服务，包括危机热线和社区咨询中心。"
+            },
+            {
+            "expression": "regulate sleep patterns",
+            "meaning": "调节睡眠模式",
+            "example": "Avoiding screen time before bedtime and maintaining a consistent sleep schedule help regulate sleep patterns and improve sleep quality.",
+            "translation": "睡前避免使用电子设备和保持规律的睡眠时间表有助于调节睡眠模式和提高睡眠质量。"
+            },
+            {
+            "expression": "monitor health conditions",
+            "meaning": "监测健康状况",
+            "example": "Patients with chronic diseases like hypertension should regularly monitor their health conditions using home blood pressure monitors.",
+            "translation": "高血压等慢性病患者应使用家用血压计定期监测自身健康状况。"
+            },
+            {
+            "expression": "educate on nutrition",
+            "meaning": "普及营养知识",
+            "example": "Healthcare professionals should educate parents on nutrition to ensure children receive a balanced diet for healthy growth and development.",
+            "translation": "医疗专业人员应向父母普及营养知识，确保儿童获得均衡饮食以促进健康成长和发育。"
+            },
+            {
+            "expression": "combat obesity rates",
+            "meaning": "降低肥胖率",
+            "example": "Taxing sugary drinks and fast food is an effective policy to combat obesity rates among adolescents.",
+            "translation": "对含糖饮料和快餐征税是降低青少年肥胖率的有效政策。"
+            },
+            {
+            "expression": "allocate healthcare resources",
+            "meaning": "分配医疗资源",
+            "example": "Healthcare authorities must allocate healthcare resources fairly to prioritize vulnerable groups such as the elderly and low-income families.",
+            "translation": "医疗当局必须公平分配医疗资源，优先考虑老年人和低收入家庭等弱势群体。"
+            },
+            {
+            "expression": "adopt healthy lifestyles",
+            "meaning": "采用健康生活方式",
+            "example": "Individuals who adopt healthy lifestyles, including regular exercise and non-smoking, have a lower risk of developing chronic diseases.",
+            "translation": "采用健康生活方式（包括定期锻炼和不吸烟）的人患慢性疾病的风险更低。"
+            },
+            {
+            "expression": "address mental health issues",
+            "meaning": "解决心理健康问题",
+            "example": "Workplaces should address mental health issues by creating a supportive environment where employees feel comfortable discussing their emotional needs.",
+            "translation": "工作场所应通过创造支持性环境来解决心理健康问题，让员工敢于讨论自身情感需求。"
+            },
+            {
+            "expression": "promote disease prevention",
+            "meaning": "促进疾病预防",
+            "example": "Public health campaigns that promote disease prevention through vaccinations and hygiene practices can significantly reduce the burden on healthcare systems.",
+            "translation": "通过疫苗接种和卫生习惯促进疾病预防的公共卫生宣传活动可显著减轻医疗系统的负担。"
+            }
+    ];
+
+
+
+        // 词汇数据 - 科技类示例
+        const technologyData = [
+            {
+            "expression": "cutting-edge technology",
+            "meaning": "尖端技术",
+            "example": "Many tech companies invest heavily in cutting-edge technology to stay ahead of competitors.",
+            "translation": "许多科技公司大力投资尖端技术以保持竞争优势。"
+            },
+            {
+            "expression": "artificial intelligence (ai)",
+            "meaning": "人工智能（AI）",
+            "example": "Artificial intelligence (AI) is revolutionizing industries from healthcare to finance.",
+            "translation": "人工智能（AI）正在彻底改变从医疗到金融的各个行业。"
+            },
+            {
+            "expression": "digital transformation",
+            "meaning": "数字化转型",
+            "example": "The retail sector has accelerated its digital transformation to meet changing consumer demands.",
+            "translation": "零售业加快了数字化转型以满足不断变化的消费者需求。"
+            },
+            {
+            "expression": "cybersecurity threats",
+            "meaning": "网络安全威胁",
+            "example": "Businesses must constantly update their systems to defend against cybersecurity threats.",
+            "translation": "企业必须不断更新系统以抵御网络安全威胁。"
+            },
+            {
+            "expression": "develop new technology",
+            "meaning": "开发新技术",
+            "example": "Universities collaborate with industries to develop new technology for sustainable energy.",
+            "translation": "大学与行业合作开发可持续能源的新技术。"
+            },
+            {
+            "expression": "promote innovation",
+            "meaning": "促进创新",
+            "example": "Government grants help promote innovation in small and medium-sized enterprises.",
+            "translation": "政府拨款帮助促进中小企业的创新。"
+            },
+            {
+            "expression": "big data analytics",
+            "meaning": "大数据分析",
+            "example": "Big data analytics allows companies to gain insights into customer behavior patterns.",
+            "translation": "大数据分析使企业能够深入了解客户行为模式。"
+            },
+            {
+            "expression": "implement solutions",
+            "meaning": "实施解决方案",
+            "example": "IT teams work quickly to implement solutions for system outages.",
+            "translation": "IT团队迅速工作以实施系统故障的解决方案。"
+            },
+            {
+            "expression": "address private concerns",
+            "meaning": "解决隐私问题",
+            "example": "Tech firms need to address private concerns to build trust with users.",
+            "translation": "科技公司需要解决隐私问题以建立用户信任。"
+            },
+            {
+            "expression": "automation of jobs",
+            "meaning": "工作自动化",
+            "example": "The automation of jobs in manufacturing has led to increased efficiency but also job displacement.",
+            "translation": "制造业的工作自动化提高了效率，但也导致了岗位流失。"
+            },
+            {
+            "expression": "virtual reality (vr)",
+            "meaning": "虚拟现实（VR）",
+            "example": "Virtual reality (VR) is used in training programs for surgeons to practice complex procedures.",
+            "translation": "虚拟现实（VR）被用于外科医生的培训项目，以练习复杂手术。"
+            },
+            {
+            "expression": "streamline processes",
+            "meaning": "简化流程",
+            "example": "Cloud-based tools help streamline processes and reduce administrative workload.",
+            "translation": "基于云的工具帮助简化流程并减少行政工作量。"
+            },
+            {
+            "expression": "ensure data security",
+            "meaning": "确保数据安全",
+            "example": "Companies must encrypt sensitive information to ensure data security.",
+            "translation": "企业必须加密敏感信息以确保数据安全。"
+            },
+            {
+            "expression": "monitor performance",  
+            "meaning": "监控性能",
+            "example": "Network administrators monitor performance to ensure smooth operation of systems.",
+            "translation": "网络管理员监控性能以确保系统平稳运行。"
+            },
+            {
+            "expression": "optimize resources",
+            "meaning": "优化资源",
+            "example": "AI algorithms optimize resources by allocating energy efficiently in smart grids.",
+            "translation": "AI算法通过在智能电网中高效分配能源来优化资源。"
+            },
+            {
+            "expression": "facilitate communication",
+            "meaning": "促进沟通",
+            "example": "Video conferencing tools facilitate communication between remote teams.",
+            "translation": "视频会议工具促进远程团队之间的沟通。"
+            },
+            {
+            "expression": "strengthen infrastructure",
+            "meaning": "加强基础设施",
+            "example": "Investing in 5G networks helps strengthen infrastructure for digital services.",
+            "translation": "投资5G网络有助于加强数字服务的基础设施。"
+            },
+            {
+            "expression": "minimize risks/costs",
+            "meaning": "最小化风险/成本",
+            "example": "Predictive maintenance uses IoT to minimize risks of equipment failure and reduce costs.",
+            "translation": "预测性维护使用物联网最小化设备故障风险并降低成本。"
+            },
+            {
+            "expression": "analyze trends",
+            "meaning": "分析趋势",
+            "example": "Marketing teams analyze trends to create targeted campaigns for customers.",
+            "translation": "营销团队分析趋势以创建针对客户的定向活动。"
+            },
+            {
+            "expression": "adopt technology",
+            "meaning": "采用技术",
+            "example": "Small businesses are slow to adopt technology due to limited budget and resources.",
+            "translation": "由于预算和资源有限，小企业采用技术的速度较慢。"
+            },
+            {
+            "expression": "regulate usage",
+            "meaning": "规范使用",
+            "example": "Governments need to regulate usage of social media to prevent misinformation.",
+            "translation": "政府需要规范社交媒体的使用以防止虚假信息。"
+            },
+            {
+            "expression": "future-proof technology",
+            "meaning": "面向未来的技术",
+            "example": "Investing in modular systems helps future-proof technology against rapid obsolescence.",
+            "translation": "投资模块化系统有助于使技术面向未来，抵御快速过时。"
+            },
+            {
+            "expression": "tech-driven economy",
+            "meaning": "科技驱动型经济",
+            "example": "Countries like Singapore are shifting towards a tech-driven economy to boost growth.",
+            "translation": "新加坡等国家正转向科技驱动型经济以促进增长。"
+            },
+            {
+            "expression": "over-reliance on technology",
+            "meaning": "过度依赖技术",
+            "example": "Over-reliance on technology can lead to loss of critical thinking skills.",
+            "translation": "过度依赖技术可能导致批判性思维能力的丧失。"
+            },
+            {
+            "expression": "machine learning algorithms",
+            "meaning": "机器学习算法",
+            "example": "Machine learning algorithms power recommendation systems in streaming platforms.",
+            "translation": "机器学习算法为流媒体平台的推荐系统提供动力。"
+            },
+            {
+            "expression": "digital literacy",
+            "meaning": "数字素养",
+            "example": "Schools should teach digital literacy to help students navigate the online world safely.",  
+            "translation": "学校应教授数字素养以帮助学生安全地浏览网络世界。"
+            },
+            {
+            "expression": "digital divide",
+            "meaning": "数字鸿沟",
+            "example": "The digital divide between urban and rural areas limits access to online education.",
+            "translation": "城乡之间的数字鸿沟限制了在线教育的获取。"
+            },
+            {
+            "expression": "ethical dilemmas in AI",
+            "meaning": "人工智能中的伦理困境",
+            "example": "Ethical dilemmas in AI include issues like bias in facial recognition systems.",
+            "translation": "人工智能中的伦理困境包括面部识别系统中的偏见等问题。"
+            },
+            {
+            "expression": "tech-savvy generation",
+            "meaning": "精通科技的一代",
+            "example": "The tech-savvy generation is more comfortable using digital tools for work and leisure.",
+            "translation": "精通科技的一代更习惯于使用数字工具进行工作和休闲。"
+            },
+            {
+            "expression": "information overload",
+            "meaning": "信息过载",
+            "example": "Constant notifications from apps contribute to information overload and reduced productivity.",
+            "translation": "应用程序的持续通知导致信息过载并降低生产力。"
+            }
+    ];
+
+        // 词汇数据 - 政府类示例
+        const governmentData = [
+            {
+                "expression": "abide by",
+                "meaning": "遵守",
+                "example": "All citizens and institutions must abide by the constitution to ensure the stability and legitimacy of the country’s political system.",
+                "translation": "所有公民和机构必须遵守宪法，以确保国家政治体系的稳定与合法性。"
+            },
+            {
+                "expression": "parliamentary democracy",
+                "meaning": "议会民主制",
+                "example": "A parliamentary democracy allows citizens to elect representatives who then form a government responsible for making laws and policies on their behalf.",
+                "translation": "议会民主制允许公民选举代表，这些代表随后组成政府，代表公民制定法律和政策。"
+            },
+            {
+                "expression": "adhere to",
+                "meaning": "遵守",
+                "example": "To maintain international credibility, governments must adhere to the treaties and agreements they sign with other nations.",
+                "translation": "为维护国际公信力，各国政府必须遵守与其他国家签署的条约和协议。"
+            },
+            {
+                "expression": "constitutional government",
+                "meaning": "宪政政府",
+                "example": "A constitutional government operates within the limits of a written constitution, which defines the powers and responsibilities of each branch of governance.",
+                "translation": "宪政政府在成文宪法的框架内运作，宪法明确规定了各治理分支的权力与责任。"
+            },
+            {
+                "expression": "the executive branch",
+                "meaning": "行政分支",
+                "example": "The executive branch, led by the president or prime minister, is responsible for implementing laws passed by the legislative branch.",
+                "translation": "由总统或首相领导的行政分支负责执行立法分支通过的法律。"
+            },
+            {
+                "expression": "the legislative branch",
+                "meaning": "立法分支",
+                "example": "The legislative branch, typically composed of elected parliamentarians, has the authority to draft, debate, and enact new laws.",
+                "translation": "立法分支通常由民选议员组成，有权起草、辩论和颁布新法律。"
+            },
+            {
+                "expression": "the separation of powers",
+                "meaning": "权力分立",
+                "example": "The separation of powers between the executive, legislative, and judicial branches prevents any single group from gaining excessive authority.",
+                "translation": "行政、立法和司法分支之间的权力分立，防止任何单一群体获得过度权力。"
+            },
+            {
+                "expression": "adopt policies",
+                "meaning": "采取政策",
+                "example": "To address climate change, many countries have adopted policies to reduce carbon emissions and promote renewable energy.",
+                "translation": "为应对气候变化，许多国家已采取政策减少碳排放并推广可再生能源。"
+            },
+            {
+                "expression": "impose spending cuts",
+                "meaning": "实施开支削减",
+                "example": "During economic recessions, governments often impose spending cuts on non-essential services to reduce budget deficits.",
+                "translation": "经济衰退期间，政府通常会对非必要服务实施开支削减，以减少预算赤字。"
+            },
+            {
+                "expression": "raise taxes on",
+                "meaning": "提高……的税收",
+                "example": "Some governments choose to raise taxes on luxury goods to generate additional revenue for social welfare programs.",
+                "translation": "一些政府选择提高奢侈品税，为社会福利项目筹集额外资金。"
+            },
+            {
+                "expression": "curb public spending on",
+                "meaning": "限制……的公共支出",
+                "example": "To control inflation, central banks may advise governments to curb public spending on infrastructure projects.",
+                "translation": "为控制通货膨胀，中央银行可能建议政府限制基础设施项目的公共支出。"
+            },
+            {
+                "expression": "allocate resources to",
+                "meaning": "将资源分配给",
+                "example": "Effective governance requires governments to allocate resources to sectors that directly improve citizens’ quality of life, such as healthcare and education.",
+                "translation": "有效的治理要求政府将资源分配给直接改善公民生活质量的领域，如医疗和教育。"
+            },
+            {
+                "expression": "introduce restrictions on",
+                "meaning": "对……实施限制",
+                "example": "In response to public health crises, governments may introduce restrictions on public gatherings to prevent the spread of disease.",
+                "translation": "为应对公共卫生危机，政府可能会对公共集会实施限制，以防止疾病传播。"
+            },
+            {
+                "expression": "infringe on/upon something",
+                "meaning": "侵犯……",
+                "example": "Critics argue that excessive surveillance measures may infringe on citizens’ right to privacy, violating fundamental human rights.",
+                "translation": "批评者认为，过度的监控措施可能侵犯公民的隐私权，违反基本人权。"
+            },
+            {
+                "expression": "be a government priority",
+                "meaning": "是政府的优先事项",
+                "example": "Reducing youth unemployment has long been a government priority, as it directly impacts social stability and economic growth.",
+                "translation": "减少青年失业长期以来是政府的优先事项，因为它直接影响社会稳定和经济增长。"
+            },
+            {
+                "expression": "prioritize expenditure on",
+                "meaning": "优先将支出用于",
+                "example": "Developing countries often prioritize expenditure on basic infrastructure, such as roads and water supply systems, to support long-term development.",
+                "translation": "发展中国家通常优先将支出用于道路和供水系统等基础基础设施，以支持长期发展。"
+            },
+            {
+                "expression": "provide funding for",
+                "meaning": "为……提供资金",
+                "example": "The government has pledged to provide funding for research into renewable energy sources to reduce dependence on fossil fuels.",
+                "translation": "政府已承诺为可再生能源研究提供资金，以减少对化石燃料的依赖。"
+            },
+            {
+                "expression": "high on the agenda",
+                "meaning": "是重要议程",
+                "example": "Addressing income inequality is high on the agenda for many political parties ahead of the upcoming general election.",
+                "translation": "在即将到来的大选前，解决收入不平等问题是许多政党的重要议程。"
+            },
+            {
+                "expression": "exert pressure on",
+                "meaning": "向……施压",
+                "example": "Environmental activists often exert pressure on governments to take immediate action to combat climate change.",
+                "translation": "环保活动人士经常向政府施压，要求其立即采取行动应对气候变化。"
+            },
+            {
+                "expression": "form a pressure group",
+                "meaning": "成立压力团体",
+                "example": "Local residents affected by the proposed highway project decided to form a pressure group to voice their concerns to the government.",
+                "translation": "受拟议高速公路项目影响的当地居民决定成立一个压力团体，向政府表达他们的关切。"
+            },
+            {
+                "expression": "provide public subsidies for",
+                "meaning": "为……提供公共补贴",
+                "example": "To support domestic agriculture, governments may provide public subsidies for farmers to offset the cost of seeds and fertilizers.",
+                "translation": "为支持国内农业，政府可能向农民提供公共补贴，以抵消种子和化肥的成本。"
+            },
+            {
+                "expression": "international bodies",
+                "meaning": "国际机构",
+                "example": "International bodies such as the United Nations play a crucial role in mediating conflicts and promoting global cooperation.",
+                "translation": "联合国等国际机构在调解冲突和促进全球合作方面发挥着关键作用。"
+            },
+            {
+                "expression": "national and local authorities",
+                "meaning": "国家和地方当局",
+                "example": "National and local authorities must collaborate closely to ensure that public services, such as education and healthcare, are accessible to all citizens.",
+                "translation": "国家和地方当局必须密切合作，确保教育和医疗等公共服务对所有公民开放。"
+            },
+            {
+                "expression": "non-governmental organizations (NGOs)",
+                "meaning": "非政府组织（NGOs）",
+                "example": "Non-governmental organizations (NGOs) often work alongside governments to deliver humanitarian aid in regions affected by natural disasters.",
+                "translation": "非政府组织（NGOs）经常与政府合作，在受自然灾害影响的地区提供人道主义援助。"
+            },
+            {
+                "expression": "campaign for something",
+                "meaning": "为……发起运动",
+                "example": "Civil society groups continue to campaign for stricter gun control laws to reduce the number of violent crimes in urban areas.",
+                "translation": "公民社会团体继续为更严格的枪支管制法律而运动，以减少城市地区的暴力犯罪数量。"
+            },
+            {
+                "expression": "government decision-making",
+                "meaning": "政府决策",
+                "example": "Transparency in government decision-making helps build public trust and ensures that policies reflect the needs of the population.",
+                "translation": "政府决策的透明度有助于建立公众信任，并确保政策反映民众的需求。"
+            },
+            {
+                "expression": "impose an official ban on",
+                "meaning": "正式禁止……",
+                "example": "In response to public health concerns, the government decided to impose an official ban on the sale of single-use plastic products.",
+                "translation": "为应对公共健康关切，政府决定正式禁止销售一次性塑料产品。"
+            },
+            {
+                "expression": "government sponsorship",
+                "meaning": "政府赞助",
+                "example": "Government sponsorship of cultural events, such as art exhibitions and music festivals, helps preserve national heritage and promote creativity.",
+                "translation": "政府对艺术展览和音乐节等文化活动的赞助有助于保护国家遗产和促进创造力。"
+            },
+            {
+                "expression": "a welfare state",
+                "meaning": "福利国家",
+                "example": "A welfare state provides a safety net for citizens, offering support such as unemployment benefits, healthcare, and housing assistance.",
+                "translation": "福利国家为公民提供安全保障，包括失业救济、医疗保健和住房援助等支持。"
+            },
+            {
+                "expression": "a stopgap measure",
+                "meaning": "权宜之计",
+                "example": "The government introduced a temporary subsidy for public transport as a stopgap measure to ease the financial burden on low-income commuters.",
+                "translation": "政府推出了公共交通临时补贴，作为缓解低收入通勤者经济负担的权宜之计。"
+            }
+        ];
+
+        // 词汇数据 - 犯罪类示例
+        const crimeData = [
+            {
+            "expression": "crime of passion",
+            "meaning": "激情犯罪",
+            "example": "A crime of passion, such as a murder committed in an uncontrollable fit of rage or jealousy, is often mitigated by courts due to the absence of premeditation and reduced criminal intent.",
+            "translation": "激情犯罪（如因无法控制的愤怒或嫉妒而实施的谋杀）通常会因缺乏预谋和犯罪意图减弱而被法庭从轻量刑。"
+            },
+            {
+            "expression": "to serve a prison sentence",
+            "meaning": "服刑",
+            "example": "Offenders convicted of armed robbery must serve a mandatory minimum prison sentence of 10 years under the country’s criminal justice laws.",
+            "translation": "根据该国刑事司法法律，被判持械抢劫罪的罪犯必须服至少10年的强制性监禁刑期。"
+            },
+            {
+            "expression": "to turn to crime/drugs",
+            "meaning": "转向犯罪/毒品",
+            "example": "Young people from low-income backgrounds who lack access to education and employment opportunities are more likely to turn to crime or drugs as a means of survival.",
+            "translation": "来自低收入背景、缺乏教育和就业机会的年轻人更有可能转向犯罪或毒品作为生存手段。"
+            },
+            {
+            "expression": "to be tough on crime",
+            "meaning": "严厉打击犯罪",
+            "example": "Many politicians advocate to be tough on crime by increasing police funding and imposing harsher penalties for violent offenses.",
+            "translation": "许多政客主张通过增加警察资金和对暴力犯罪实施更严厉的惩罚来严厉打击犯罪。"
+            },
+            {
+            "expression": "to contest the verdict",
+            "meaning": "对判决提出上诉",
+            "example": "The defendant decided to contest the verdict of guilty, citing insufficient evidence and procedural errors during the trial.",
+            "translation": "被告以证据不足和审判过程中的程序错误为由，决定对有罪判决提出上诉。"
+            },
+            {
+            "expression": "to take into consideration",
+            "meaning": "考虑",
+            "example": "Judges must take into consideration the defendant’s prior criminal record and remorse when determining the appropriate sentence.",
+            "translation": "法官在确定适当刑期时，必须考虑被告的前科记录和悔罪表现。"
+            },
+            {
+            "expression": "to reintegrate back into society/community",
+            "meaning": "重新融入社会/社区",
+            "example": "Prison education programs that teach vocational skills and social responsibility help offenders reintegrate back into society after their release.",
+            "translation": "教授职业技能和社会责任的监狱教育项目有助于罪犯在释放后重新融入社会。"
+            },
+            {
+            "expression": "to be soft on crime",
+            "meaning": "对犯罪手软",
+            "example": "Critics argue that reducing sentences for non-violent offenses is equivalent to being soft on crime and may encourage repeat offending.",
+            "translation": "批评者认为，对非暴力犯罪减轻量刑等同于对犯罪手软，可能会助长累犯行为。"
+            },
+            {
+            "expression": "a policy of zero tolerance",
+            "meaning": "零容忍政策",
+            "example": "A policy of zero tolerance for drug possession in schools has significantly reduced substance abuse among students in urban areas.",
+            "translation": "学校对持有毒品采取零容忍政策，显著减少了城市地区学生的药物滥用现象。"
+            },
+            {
+            "expression": "a chance of rehabilitation",
+            "meaning": "改过自新的机会",
+            "example": "Non-custodial sentences, such as community service, give first-time offenders a greater chance of rehabilitation than short-term imprisonment.",
+            "translation": "社区服务等非监禁刑比短期监禁更能给初犯者提供改过自新的机会。"
+            },
+            {
+            "expression": "to embark on something",
+            "meaning": "开始从事某事",
+            "example": "After completing his prison sentence, the former offender decided to embark on a career in social work to help other ex-convicts rebuild their lives.",
+            "translation": "刑满释放后，这位前罪犯决定投身社会工作，帮助其他刑满释放人员重建生活。"
+            },
+            {
+            "expression": "to make a fresh start",
+            "meaning": "重新开始",
+            "example": "Government-funded reentry programs provide housing, job training, and counseling to help ex-offenders make a fresh start and avoid recidivism.",
+            "translation": "政府资助的重返社会项目提供住房、职业培训和咨询服务，帮助刑满释放人员重新开始生活，避免再次犯罪。"
+            },
+            {
+            "expression": "to act as a deterrent",
+            "meaning": "起到威慑作用",
+            "example": "The threat of long prison sentences and heavy fines is designed to act as a deterrent to potential white-collar criminals, such as embezzlers and fraudsters.",
+            "translation": "长期监禁和高额罚款的威胁旨在对潜在的白领罪犯（如贪污犯和诈骗犯）起到威慑作用。"
+            },
+            {
+            "expression": "to release back into society",
+            "meaning": "重返社会",
+            "example": "Prisoners who demonstrate good behavior and complete rehabilitation programs are eligible to be released back into society on parole after serving half their sentence.",
+            "translation": "表现良好且完成改造项目的囚犯在服刑一半后，有资格获得假释重返社会。"
+            },
+            {
+            "expression": "corporal punishment",
+            "meaning": "体罚",
+            "example": "Most developed countries have banned corporal punishment in schools and prisons due to its violation of human rights and potential for physical and psychological harm.",
+            "translation": "大多数发达国家已禁止在学校和监狱中使用体罚，因其侵犯人权且可能造成身心伤害。"
+            },
+            {
+            "expression": "drug trafficking",
+            "meaning": "毒品贩运",
+            "example": "International law enforcement agencies collaborate closely to combat drug trafficking across borders, targeting smuggling routes and criminal networks.",
+            "translation": "国际执法机构密切合作打击跨境毒品贩运，重点打击走私路线和犯罪网络。"
+            },
+            {
+            "expression": "a non-custodial sentence",
+            "meaning": "非监禁刑",
+            "example": "First-time offenders convicted of minor theft may receive a non-custodial sentence, such as probation or community service, instead of imprisonment.",
+            "translation": "初犯轻微盗窃罪的罪犯可能会被判处非监禁刑（如缓刑或社区服务），而非监禁。"
+            },
+            {
+            "expression": "to be found guilty",
+            "meaning": "被判有罪",
+            "example": "The defendant was found guilty of manslaughter after the prosecution presented overwhelming evidence linking him to the victim’s death.",
+            "translation": "在检方出示大量证据证明被告与受害者死亡有关后，被告被判过失杀人罪成立。"
+            },
+            {
+            "expression": "the full weight of the law",
+            "meaning": "法律的严惩",
+            "example": "Those who engage in hate crimes will face the full weight of the law, including lengthy prison sentences and permanent criminal records.",
+            "translation": "参与仇恨犯罪的人将受到法律的严惩，包括长期监禁和永久犯罪记录。"
+            },
+            {
+            "expression": "to impose a ban on sth",
+            "meaning": "禁止某事",
+            "example": "The government decided to impose a ban on single-use plastic bags to reduce environmental pollution and promote sustainable practices.",
+            "translation": "政府决定禁止使用一次性塑料袋，以减少环境污染并推广可持续做法。"
+            },
+            {
+            "expression": "to convict a criminal",
+            "meaning": "定罪罪犯",
+            "example": "Forensic evidence, such as DNA samples and fingerprint analysis, is crucial to convict a criminal beyond reasonable doubt in modern court cases.",
+            "translation": "DNA样本和指纹分析等法医证据对于在现代法庭案件中排除合理怀疑定罪罪犯至关重要。"
+            },
+            {
+            "expression": "law-abiding citizens",
+            "meaning": "守法公民",
+            "example": "Law-abiding citizens have the right to feel safe in their communities, which requires effective policing and strict enforcement of criminal laws.",
+            "translation": "守法公民有权在社区中感到安全，这需要有效的警务和严格的刑法执行。"
+            },
+            {
+            "expression": "to enforce the law",
+            "meaning": "执法",
+            "example": "Police forces must enforce the law impartially, without discrimination based on race, gender, or socioeconomic status.",
+            "translation": "警察部队必须公正执法，不得因种族、性别或社会经济地位而歧视。"
+            },
+            {
+            "expression": "capital punishment",
+            "meaning": "死刑",
+            "example": "Debates over capital punishment center on its ethical implications, deterrent effect, and the risk of executing innocent people.",
+            "translation": "关于死刑的争论集中在其伦理意义、威慑效果以及处决无辜者的风险上。"
+            },
+            {
+            "expression": "forensic evidence",
+            "meaning": "法医证据",
+            "example": "Forensic evidence collected from the crime scene played a pivotal role in identifying the perpetrator and securing a conviction.",
+            "translation": "从犯罪现场收集的法医证据在识别肇事者和确保定罪方面发挥了关键作用。"
+            },
+            {
+            "expression": "to install surveillance cameras",
+            "meaning": "安装监控摄像头",
+            "example": "Many cities have chosen to install surveillance cameras in public areas to deter crime and assist law enforcement in solving cases.",
+            "translation": "许多城市选择在公共场所安装监控摄像头，以威慑犯罪并协助执法部门破案。"
+            },
+            {
+            "expression": "to put on probation",
+            "meaning": "缓刑",
+            "example": "Juvenile offenders are often put on probation rather than sent to prison, as it allows them to remain in the community while receiving guidance and supervision.",
+            "translation": "青少年罪犯通常会被缓刑而非送进监狱，因为这让他们能留在社区接受指导和监督。"
+            },
+            {
+            "expression": "to punish wrongdoers",
+            "meaning": "惩罚违法者",
+            "example": "The primary purpose of the criminal justice system is to punish wrongdoers, protect the public, and rehabilitate offenders to prevent future crimes.",
+            "translation": "刑事司法系统的主要目的是惩罚违法者、保护公众，并改造罪犯以预防未来犯罪。"
+            },
+            {
+            "expression": "to arrest suspects",
+            "meaning": "逮捕嫌疑人",
+            "example": "Police have the authority to arrest suspects if they have reasonable grounds to believe the individual has committed or is about to commit a crime.",
+            "translation": "如果警方有合理理由相信某人已实施或即将实施犯罪，则有权逮捕嫌疑人。"
+            },
+            {
+            "expression": "the letter of the law",
+            "meaning": "法律条文",
+            "example": "Judges must apply the letter of the law when making rulings, even if the outcome seems harsh or inconsistent with public opinion.",
+            "translation": "法官在作出裁决时必须严格遵守法律条文，即使结果看似严厉或与公众意见不一致。"
+            }
+    ];
+
+
+        // 词汇数据 - 媒体类示例
+        const mediaData = [
+            {
+            "expression": "mass media",
+            "meaning": "大众媒体",
+            "example": "Mass media plays a crucial role in shaping public opinion on social issues like climate change.",
+            "translation": "大众媒体在塑造公众对气候变化等社会问题的舆论方面发挥着关键作用。"
+            },
+            {
+            "expression": "digital advertising",
+            "meaning": "数字广告",
+            "example": "Digital advertising has become more effective than traditional methods due to its ability to target specific audiences.",
+            "translation": "数字广告因其能精准定位特定受众而比传统方法更有效。"
+            },
+            {
+            "expression": "social media platforms",
+            "meaning": "社交媒体平台",
+            "example": "Social media platforms like Instagram and TikTok are widely used by brands to promote their products to young consumers.",
+            "translation": "Instagram和TikTok等社交媒体平台被品牌广泛用于向年轻消费者推广产品。"
+            },
+            {
+            "expression": "targeted ads",
+            "meaning": "定向广告",
+            "example": "Targeted ads based on user browsing history often raise concerns about online privacy infringement.",
+            "translation": "基于用户浏览历史的定向广告常引发对在线隐私侵犯的担忧。"
+            },
+            {
+            "expression": "media literacy",
+            "meaning": "媒体素养",
+            "example": "Schools should teach media literacy to help students distinguish between reliable and misleading information online.",
+            "translation": "学校应教授媒体素养，帮助学生区分网络上可靠与误导性的信息。"
+            },
+            {
+            "expression": "fake news",
+            "meaning": "假新闻",
+            "example": "The spread of fake news via social media can have serious consequences for political stability and public trust.",
+            "translation": "通过社交媒体传播的假新闻可能对政治稳定和公众信任产生严重后果。"
+            },
+            {
+            "expression": "advertising campaigns",
+            "meaning": "广告campaign",
+            "example": "Successful advertising campaigns often combine creative visuals with emotional storytelling to resonate with audiences.",
+            "translation": "成功的广告campaign通常结合创意视觉与情感叙事，以引起受众共鸣。"
+            },
+            {
+            "expression": "brand awareness",
+            "meaning": "品牌认知度",
+            "example": "Celebrity endorsements are commonly used to increase brand awareness and attract new customers.",
+            "translation": "名人代言常被用于提高品牌认知度和吸引新客户。"
+            },
+            {
+            "expression": "media influence",
+            "meaning": "媒体影响力",
+            "example": "The media influence on young people's body image has been a topic of debate among psychologists and educators.",
+            "translation": "媒体对年轻人身体形象的影响一直是心理学家和教育工作者争论的话题。"
+            },
+            {
+            "expression": "online privacy",
+            "meaning": "在线隐私",
+            "example": "Many users are unaware of how their personal data is collected and used by social media companies, threatening their online privacy.",
+            "translation": "许多用户不知道社交媒体公司如何收集和使用他们的个人数据，这威胁到他们的在线隐私。"
+            },
+            {
+            "expression": "celebrity endorsement",
+            "meaning": "名人代言",
+            "example": "Celebrity endorsement can significantly boost sales, but it also carries risks if the celebrity's image is tarnished.",
+            "translation": "名人代言能显著提升销量，但如果名人形象受损也会带来风险。"
+            },
+            {
+            "expression": "commercial breaks",
+            "meaning": "商业广告时段",
+            "example": "Commercial breaks during TV shows are often criticized for being too long and interrupting the viewing experience.",
+            "translation": "电视节目中的商业广告时段常因过长且打断观看体验而受到批评。"
+            },
+            {
+            "expression": "media censorship",
+            "meaning": "媒体审查",
+            "example": "Media censorship is a controversial issue, as it balances between protecting public interest and limiting freedom of expression.",
+            "translation": "媒体审查是一个有争议的问题，因为它在保护公共利益和限制言论自由之间寻求平衡。"
+            },
+            {
+            "expression": "viral marketing",
+            "meaning": "病毒式营销",
+            "example": "Viral marketing relies on users sharing content voluntarily, making it a cost-effective way to reach a large audience.",
+            "translation": "病毒式营销依赖用户自愿分享内容，使其成为接触大量受众的经济有效方式。"
+            },
+            {
+            "expression": "consumer behavior",
+            "meaning": "消费者行为",
+            "example": "Advertising often uses psychological tactics to influence consumer behavior and encourage impulse purchases.",
+            "translation": "广告常使用心理策略影响消费者行为，鼓励冲动购买。"
+            },
+            {
+            "expression": "advertising ethics",
+            "meaning": "广告伦理",
+            "example": "Misleading claims about product effectiveness violate advertising ethics and can lead to legal penalties.",
+            "translation": "关于产品效果的误导性声明违反广告伦理，可能导致法律处罚。"
+            },
+            {
+            "expression": "traditional media",
+            "meaning": "传统媒体",
+            "example": "Traditional media like newspapers and TV still hold significant influence over older generations.",
+            "translation": "报纸和电视等传统媒体对老一辈仍有重要影响。"
+            },
+            {
+            "expression": "content creation",
+            "meaning": "内容创作",
+            "example": "Content creation for social media requires understanding the preferences and interests of the target audience.",
+            "translation": "社交媒体的内容创作需要了解目标受众的偏好和兴趣。"
+            },
+            {
+            "expression": "media saturation",
+            "meaning": "媒体饱和",
+            "example": "Media saturation means that consumers are exposed to hundreds of ads every day, making it harder for brands to stand out.",
+            "translation": "媒体饱和意味着消费者每天接触数百条广告，使品牌更难脱颖而出。"
+            },
+            {
+            "expression": "product placement",
+            "meaning": "产品植入",
+            "example": "Product placement in movies and TV shows is a subtle form of advertising that reaches audiences without obvious commercial breaks.",
+            "translation": "电影和电视节目中的产品植入是一种微妙的广告形式，无需明显的商业时段即可接触受众。"
+            },
+            {
+            "expression": "public service announcements (PSAs)",
+            "meaning": "公益广告（PSAs）",
+            "example": "Public service announcements (PSAs) are designed to raise awareness about social issues like anti-smoking and road safety.",
+            "translation": "公益广告（PSAs）旨在提高对反吸烟和道路安全等社会问题的认识。"
+            },
+            {
+            "expression": "media bias",
+            "meaning": "媒体偏见",
+            "example": "Critics argue that some news outlets exhibit media bias by favoring certain political parties or ideologies.",
+            "translation": "批评者认为，一些新闻机构通过偏袒特定政党或意识形态表现出媒体偏见。"
+            },
+            {
+            "expression": "influencer marketing",
+            "meaning": "网红营销",
+            "example": "Influencer marketing has grown rapidly in recent years, as brands collaborate with social media influencers to promote their products.",
+            "translation": "网红营销近年来发展迅速，品牌与社交媒体网红合作推广产品。"
+            },
+            {
+            "expression": "data privacy",
+            "meaning": "数据隐私",
+            "example": "New regulations like GDPR aim to protect users' data privacy by giving them more control over their personal information.",
+            "translation": "GDPR等新法规旨在通过让用户更能控制个人信息来保护其数据隐私。"
+            },
+            {
+            "expression": "advertising regulations",
+            "meaning": "广告法规",
+            "example": "Advertising regulations prohibit false or deceptive claims to ensure fair competition and protect consumers.",
+            "translation": "广告法规禁止虚假或欺骗性声明，以确保公平竞争和保护消费者。"
+            },
+            {
+            "expression": "media convergence",
+            "meaning": "媒体融合",
+            "example": "Media convergence refers to the integration of different media forms, such as print, broadcast, and digital, into a single platform.",
+            "translation": "媒体融合指不同媒体形式（如印刷、广播和数字）整合成单一平台的过程。"
+            },
+            {
+            "expression": "consumerism",
+            "meaning": "消费主义",
+            "example": "The media often promotes consumerism by encouraging people to buy more products to achieve happiness and success.",
+            "translation": "媒体常通过鼓励人们购买更多产品以获得幸福和成功来推广消费主义。"
+            },
+            {
+            "expression": "interactive advertising",
+            "meaning": "互动广告",
+            "example": "Interactive advertising allows users to engage with content, such as quizzes or polls, making the ad experience more memorable.",
+            "translation": "互动广告允许用户参与内容（如测验或投票），使广告体验更难忘。"
+            },
+            {
+            "expression": "media responsibility",
+            "meaning": "媒体责任",
+            "example": "Media responsibility includes providing accurate information and avoiding sensationalism to maintain public trust.",
+            "translation": "媒体责任包括提供准确信息和避免耸人听闻，以维持公众信任。"
+            },
+            {
+            "expression": "ad-free content",
+            "meaning": "无广告内容",
+            "example": "Many users are willing to pay for ad-free content to enjoy an uninterrupted viewing or reading experience.",
+            "translation": "许多用户愿意为无广告内容付费，以享受不间断的观看或阅读体验。"
+            }
+    
+        ];
+
+        // 词汇数据 - 社会类示例
+        const societyData = [
+            {
+            "expression": "aging population",
+            "meaning": "人口老龄化",
+            "example": "Many developed nations are facing the challenge of an aging population, which puts increasing pressure on their healthcare systems and pension schemes.",
+            "translation": "许多发达国家正面临人口老龄化的挑战，这给其医疗体系和养老金计划带来了日益增长的压力。"
+            },
+            {
+            "expression": "income inequality",
+            "meaning": "收入不平等",
+            "example": "Income inequality in urban areas often leads to social unrest and hinders the overall development of a nation.",
+            "translation": "城市地区的收入不平等往往导致社会动荡，阻碍国家的整体发展。"
+            },
+            {
+            "expression": "urbanization",
+            "meaning": "城市化",
+            "example": "Rapid urbanization in developing countries has resulted in overcrowded cities and strained public resources.",
+            "translation": "发展中国家的快速城市化导致城市过度拥挤，公共资源紧张。"
+            },
+            {
+            "expression": "multicultural society",
+            "meaning": "多元文化社会",
+            "example": "A multicultural society can foster creativity and innovation by bringing together diverse perspectives and traditions.",
+            "translation": "多元文化社会通过汇集不同的视角和传统，可以促进创造力和创新。"
+            },
+            {
+            "expression": "social security system",
+            "meaning": "社会保障体系",
+            "example": "A robust social security system is essential to protect vulnerable groups from poverty and hardship during economic downturns.",
+            "translation": "健全的社会保障体系对于在经济低迷时期保护弱势群体免受贫困和困境至关重要。"
+            },
+            {
+            "expression": "gender equality",
+            "meaning": "性别平等",
+            "example": "Promoting gender equality in the workplace can boost economic productivity by tapping into the full potential of the female workforce.",
+            "translation": "在工作场所促进性别平等可以通过挖掘女性劳动力的全部潜力来提高经济生产力。"
+            },
+            {
+            "expression": "urban sprawl",
+            "meaning": "城市扩张",
+            "example": "Urban sprawl not only consumes valuable agricultural land but also contributes to air pollution and increased traffic congestion.",
+            "translation": "城市扩张不仅消耗宝贵的农业用地，还导致空气污染和交通拥堵加剧。"
+            },
+            {
+            "expression": "environmental protection",
+            "meaning": "环境保护",
+            "example": "Governments should prioritize environmental protection by investing in renewable energy sources and reducing carbon emissions.",
+            "translation": "政府应通过投资可再生能源和减少碳排放来优先考虑环境保护。"
+            },
+            {
+            "expression": "community cohesion",
+            "meaning": "社区凝聚力",
+            "example": "Community cohesion can be strengthened through neighborhood events and volunteer programs that encourage interaction among residents.",
+            "translation": "通过社区活动和志愿者项目鼓励居民互动，可以增强社区凝聚力。"
+            },
+            {
+            "expression": "population density",
+            "meaning": "人口密度",
+            "example": "High population density in megacities often leads to insufficient public services such as education and healthcare.",
+            "translation": "特大城市的高人口密度往往导致教育和医疗等公共服务不足。"
+            },
+            {
+            "expression": "alleviate traffic congestion",
+            "meaning": "缓解交通拥堵",
+            "example": "Expanding public transportation networks is an effective way to alleviate traffic congestion in urban areas.",
+            "translation": "扩大公共交通网络是缓解城市交通拥堵的有效方法。"
+            },
+            {
+            "expression": "promote social harmony",
+            "meaning": "促进社会和谐",
+            "example": "Implementing inclusive policies that respect cultural diversity is key to promoting social harmony in a pluralistic society.",
+            "translation": "实施尊重文化多样性的包容政策是在多元社会中促进社会和谐的关键。"
+            },
+            {
+            "expression": "improve quality of life",
+            "meaning": "提高生活质量",
+            "example": "Increasing access to green spaces and recreational facilities can significantly improve the quality of life for urban residents.",
+            "translation": "增加绿色空间和娱乐设施的可及性可以显著提高城市居民的生活质量。"
+            },
+            {
+            "expression": "reduce poverty",
+            "meaning": "减少贫困",
+            "example": "Investing in education and job training programs is crucial to reduce poverty and break the cycle of intergenerational disadvantage.",
+            "translation": "投资教育和职业培训项目对于减少贫困和打破代际劣势循环至关重要。"
+            },
+            {
+            "expression": "strengthen public services",
+            "meaning": "加强公共服务",
+            "example": "Strengthening public services such as healthcare and education is essential for building a prosperous and equitable society.",
+            "translation": "加强医疗和教育等公共服务对于建设繁荣公平的社会至关重要。"
+            },
+            {
+            "expression": "drive sustainable development",
+            "meaning": "推动可持续发展",
+            "example": "Adopting a circular economy model can drive sustainable development by minimizing waste and maximizing resource efficiency.",
+            "translation": "采用循环经济模式可以通过减少浪费和提高资源效率来推动可持续发展。"
+            },
+            {
+            "expression": "upgrade infrastructure",
+            "meaning": "升级基础设施",
+            "example": "Upgrading infrastructure such as roads and railways can stimulate economic growth by improving connectivity and reducing transportation costs.",
+            "translation": "升级道路和铁路等基础设施可以通过改善连通性和降低运输成本来刺激经济增长。"
+            },
+            {
+            "expression": "support vulnerable groups",
+            "meaning": "支持弱势群体",
+            "example": "Governments should provide financial subsidies and social support to vulnerable groups such as the elderly and disabled.",
+            "translation": "政府应为老年人和残疾人等弱势群体提供财政补贴和社会支持。"
+            },
+            {
+            "expression": "address housing shortages",
+            "meaning": "解决住房短缺",
+            "example": "Building affordable housing units is a practical solution to address housing shortages in high-demand urban areas.",
+            "translation": "建设保障性住房是解决高需求城市地区住房短缺的切实办法。"
+            },
+            {
+            "expression": "foster cultural integration",
+            "meaning": "促进文化融合",
+            "example": "Offering language courses and cultural exchange programs can foster cultural integration among immigrant communities.",
+            "translation": "提供语言课程和文化交流项目可以促进移民社区之间的文化融合。"
+            },
+            {
+            "expression": "combat climate change",
+            "meaning": "应对气候变化",
+            "example": "International cooperation is essential to combat climate change and reduce the global impact of greenhouse gas emissions.",
+            "translation": "国际合作对于应对气候变化和减少温室气体排放的全球影响至关重要。"
+            },
+            {
+            "expression": "enhance public safety",
+            "meaning": "提升公共安全",
+            "example": "Installing advanced surveillance systems and increasing police patrols can enhance public safety in urban neighborhoods.",
+            "translation": "安装先进的监控系统和增加警察巡逻可以提升城市社区的公共安全。"
+            },
+            {
+            "expression": "expand access to healthcare",
+            "meaning": "扩大医疗可及性",
+            "example": "Expanding access to healthcare in rural areas can be achieved through mobile clinics and telemedicine services.",
+            "translation": "通过移动诊所和远程医疗服务可以扩大农村地区的医疗可及性。"
+            },
+            {
+            "expression": "encourage volunteerism",
+            "meaning": "鼓励志愿服务",
+            "example": "Schools should encourage volunteerism among students to cultivate their sense of social responsibility and community engagement.",
+            "translation": "学校应鼓励学生参与志愿服务，培养他们的社会责任感和社区参与意识。"
+            },
+            {
+            "expression": "regulate urban growth",
+            "meaning": "规范城市增长",
+            "example": "Effective urban planning is necessary to regulate urban growth and prevent uncontrolled expansion of cities.",
+            "translation": "有效的城市规划对于规范城市增长和防止城市无节制扩张是必要的。"
+            },
+            {
+            "expression": "bridge the digital divide",
+            "meaning": "弥合数字鸿沟",
+            "example": "Bridging the digital divide requires governments to provide affordable internet access to rural and low-income communities.",
+            "translation": "弥合数字鸿沟需要政府为农村和低收入社区提供负担得起的互联网接入。"
+            },
+            {
+            "expression": "protect cultural heritage",
+            "meaning": "保护文化遗产",
+            "example": "Protecting cultural heritage sites is crucial to preserve a nation’s history and maintain its cultural identity.",
+            "translation": "保护文化遗产地对于保存国家历史和维护其文化身份至关重要。"
+            },
+            {
+            "expression": "manage population growth",
+            "meaning": "管理人口增长",
+            "example": "Implementing family planning policies is an effective way to manage population growth and reduce resource strain.",
+            "translation": "实施计划生育政策是管理人口增长和减少资源压力的有效方法。"
+            },
+            {
+            "expression": "boost economic mobility",
+            "meaning": "提升经济流动性",
+            "example": "Providing equal educational opportunities to all citizens can boost economic mobility and reduce intergenerational poverty.",
+            "translation": "为所有公民提供平等的教育机会可以提升经济流动性，减少代际贫困。"
+            },
+            {
+            "expression": "ensure food security",
+            "meaning": "确保粮食安全",
+            "example": "Investing in modern agricultural technologies and sustainable farming practices can ensure food security for a growing global population.",
+            "translation": "投资现代农业技术和可持续农业实践可以确保不断增长的全球人口的粮食安全。"
+            }
+    ];
+
+
+        // 词汇数据 - 商业类示例
+        const businessData = [
+            {
+            "expression": "take something into consideration/account",
+            "meaning": "考虑某事",
+            "example": "When making strategic decisions, business leaders should take market trends into consideration.",
+            "translation": "做战略决策时，企业领导者应考虑市场趋势。"
+            },
+            {
+            "expression": "break into a market",
+            "meaning": "打入市场",
+            "example": "The Chinese electronics brand successfully broke into the Southeast Asian market last year.",
+            "translation": "这家中国电子品牌去年成功打入东南亚市场。"
+            },
+            {
+            "expression": "keep someone’s word",
+            "meaning": "信守承诺",
+            "example": "A reliable partner always keeps their word to maintain long-term cooperation.",
+            "translation": "可靠的合作伙伴总会信守承诺，以维持长期合作。"
+            },
+            {
+            "expression": "reach a consensus",
+            "meaning": "达成共识",
+            "example": "After three rounds of negotiations, the two parties finally reached a consensus on the contract terms.",
+            "translation": "经过三轮谈判，双方最终就合同条款达成共识。"
+            },
+            {
+            "expression": "make the most of something",
+            "meaning": "充分利用某物",
+            "example": "Small businesses should make the most of social media platforms to expand their customer base.",
+            "translation": "小企业应充分利用社交媒体平台扩大客户群。"
+            },
+            {
+            "expression": "go out of business",
+            "meaning": "停业倒闭",
+            "example": "Many traditional bookstores went out of business due to the rise of e-commerce.",
+            "translation": "由于电子商务兴起，许多传统书店停业倒闭。"
+            },
+            {
+            "expression": "do market research",
+            "meaning": "做市场调研",
+            "example": "Before launching a new product, companies must do thorough market research to understand consumer needs.",
+            "translation": "推出新产品前，企业必须做全面市场调研以了解消费者需求。"
+            },
+            {
+            "expression": "make cutbacks",
+            "meaning": "削减开支",
+            "example": "To survive the economic downturn, the company had to make cutbacks on non-essential expenses.",
+            "translation": "为度过经济低迷期，公司不得不削减非必要开支。"
+            },
+            {
+            "expression": "manage expectations",
+            "meaning": "管理期望",
+            "example": "Project managers need to manage expectations to avoid overpromising and underdelivering.",
+            "translation": "项目经理需管理期望，避免承诺过多而交付不足。"
+            },
+            {
+            "expression": "make a calculation",
+            "meaning": "做计算",
+            "example": "The finance team must make a precise calculation of the project’s return on investment.",
+            "translation": "财务团队必须精确计算项目的投资回报率。"
+            },
+            {
+            "expression": "pay in arrears",
+            "meaning": "拖欠付款",
+            "example": "Some clients pay in arrears, which puts pressure on the company’s cash flow.",
+            "translation": "部分客户拖欠付款，给公司现金流带来压力。"
+            },
+            {
+            "expression": "buy at auction",
+            "meaning": "拍卖购买",
+            "example": "The real estate company bought the commercial building at auction for a discounted price.",
+            "translation": "这家房地产公司在拍卖会上以折扣价买下了这栋商业楼。"
+            },
+            {
+            "expression": "squander a chance/savings",
+            "meaning": "浪费机会/积蓄",
+            "example": "He squandered a golden chance to expand his business by ignoring market feedback.",
+            "translation": "他因忽视市场反馈，浪费了拓展业务的黄金机会。"
+            },
+            {
+            "expression": "overhead cost",
+            "meaning": "运营成本",
+            "example": "Rent, utilities, and office supplies are part of the company’s monthly overhead cost.",
+            "translation": "租金、水电费和办公用品是公司每月运营成本的一部分。"
+            },
+            {
+            "expression": "a takeover",
+            "meaning": "收购",
+            "example": "The global retail giant announced a takeover of a local grocery chain last month.",
+            "translation": "这家全球零售巨头上月宣布收购一家本地连锁超市。"
+            },
+            {
+            "expression": "a merger",
+            "meaning": "合并",
+            "example": "The merger of the two pharmaceutical companies created a leader in the industry.",
+            "translation": "两家制药公司合并后成为行业领导者。"
+            },
+            {
+            "expression": "a heavy workload",
+            "meaning": "繁重的工作量",
+            "example": "Employees often face a heavy workload during the end-of-year financial audit.",
+            "translation": "员工在年末财务审计期间常面临繁重的工作量。"
+            },
+            {
+            "expression": "compensation",
+            "meaning": "补偿/薪酬",
+            "example": "The company offered financial compensation to customers affected by the product recall.",
+            "translation": "公司向受产品召回影响的客户提供了经济补偿。"
+            },
+            {
+            "expression": "revenue",
+            "meaning": "收入/收益",
+            "example": "The company’s annual revenue reached $10 billion for the first time in 2023.",
+            "translation": "该公司2023年年度收入首次达到100亿美元。"
+            },
+            {
+            "expression": "white-collar",
+            "meaning": "白领",
+            "example": "White-collar workers typically perform professional or administrative tasks in offices.",
+            "translation": "白领通常在办公室从事专业或行政工作。"
+            },
+            {
+            "expression": "blue-collar",
+            "meaning": "蓝领",
+            "example": "Blue-collar workers play a key role in manufacturing and construction industries.",
+            "translation": "蓝领工人在制造业和建筑业中发挥关键作用。"
+            },
+            {
+            "expression": "run your own business",
+            "meaning": "经营自己的生意",
+            "example": "Many young entrepreneurs choose to run their own business instead of working for corporations.",
+            "translation": "许多年轻创业者选择经营自己的生意，而非为企业打工。"
+            },
+            {
+            "expression": "earn a living",
+            "meaning": "谋生",
+            "example": "She earns a living by providing consulting services to small businesses.",
+            "translation": "她通过为小企业提供咨询服务谋生。"
+            },
+            {
+            "expression": "enhance their public image",
+            "meaning": "提升公众形象",
+            "example": "The company sponsored environmental projects to enhance its public image.",
+            "translation": "该公司赞助环保项目以提升公众形象。"
+            },
+            {
+            "expression": "grow a business",
+            "meaning": "拓展业务",
+            "example": "Investing in digital marketing is an effective way to grow a business in the digital age.",
+            "translation": "投资数字营销是数字时代拓展业务的有效方式。"
+            },
+            {
+            "expression": "gain a competitive edge",
+            "meaning": "获得竞争优势",
+            "example": "Innovation in product design helps companies gain a competitive edge over rivals.",
+            "translation": "产品设计创新帮助企业获得超越竞争对手的优势。"
+            },
+            {
+            "expression": "maximize profits",
+            "meaning": "最大化利润",
+            "example": "Companies often optimize supply chains to maximize profits while reducing costs.",
+            "translation": "企业常通过优化供应链在降低成本的同时最大化利润。"
+            },
+            {
+            "expression": "conduct a business",
+            "meaning": "经营业务",
+            "example": "Ethically conducting a business is essential for building customer trust.",
+            "translation": "诚信经营业务对建立客户信任至关重要。"
+            },
+            {
+            "expression": "be made redundant",
+            "meaning": "被裁员",
+            "example": "Fifty employees were made redundant after the company’s restructuring plan.",
+            "translation": "公司重组计划后，50名员工被裁员。"
+            },
+            {
+            "expression": "pension scheme",
+            "meaning": "养老金计划",
+            "example": "The company offers a generous pension scheme to reward long-serving employees.",
+            "translation": "该公司为长期服务的员工提供慷慨的养老金计划。"
+            }
+        ];
+
+        // 词汇数据 - 运动类示例
+        const sportData = [
+            {
+            "expression": "take up sport/to take up exercise",
+            "meaning": "开始从事运动/开始锻炼",
+            "example": "Many people decide to take up sport after realizing the benefits of regular physical activity.",
+            "translation": "许多人在意识到规律体育活动的益处后，决定开始从事运动。"
+            },
+            {
+            "expression": "get into shape",
+            "meaning": "健身塑形",
+            "example": "She started jogging every morning to get into shape for her upcoming marathon.",
+            "translation": "她开始每天早上慢跑，为即将到来的马拉松健身塑形。"
+            },
+            {
+            "expression": "keep fit",
+            "meaning": "保持健康",
+            "example": "Cycling to work is a great way to keep fit without spending extra time on exercise.",
+            "translation": "骑自行车上班是无需额外花时间锻炼就能保持健康的好方法。"
+            },
+            {
+            "expression": "exert oneself",
+            "meaning": "努力锻炼/尽力",
+            "example": "Athletes must exert themselves during training to improve their performance.",
+            "translation": "运动员必须在训练中努力锻炼，以提升自己的表现。"
+            },
+            {
+            "expression": "work out at the gym",
+            "meaning": "在健身房锻炼",
+            "example": "He works out at the gym three times a week to build muscle strength.",
+            "translation": "他每周在健身房锻炼三次，以增强肌肉力量。"
+            },
+            {
+            "expression": "be out of condition",
+            "meaning": "身体状况不佳",
+            "example": "After months of inactivity, he was out of condition and struggled to climb stairs.",
+            "translation": "经过数月的不活动，他身体状况不佳，爬楼梯都很吃力。"
+            },
+            {
+            "expression": "be in the peak of condition",
+            "meaning": "处于最佳状态",
+            "example": "The tennis player was in the peak of condition before the Grand Slam tournament.",
+            "translation": "这位网球运动员在大满贯赛前处于最佳状态。"
+            },
+            {
+            "expression": "take gentle exercise",
+            "meaning": "进行轻度锻炼",
+            "example": "Doctors recommend that elderly people take gentle exercise like yoga or walking.",
+            "translation": "医生建议老年人进行瑜伽或散步等轻度锻炼。"
+            },
+            {
+            "expression": "alternative forms of exercise",
+            "meaning": "替代锻炼方式",
+            "example": "Pilates and tai chi are popular alternative forms of exercise for people with joint problems.",
+            "translation": "普拉提和太极是关节有问题人群的流行替代锻炼方式。"
+            },
+            {
+            "expression": "outlaw dangerous sports",
+            "meaning": "取缔危险运动",
+            "example": "Some countries have attempted to outlaw dangerous sports like base jumping due to high injury rates.",
+            "translation": "一些国家因高受伤率，试图取缔翼装飞行等危险运动。"
+            },
+            {
+            "expression": "on safety grounds",
+            "meaning": "出于安全考虑",
+            "example": "The event was canceled on safety grounds after a severe storm warning was issued.",
+            "translation": "在发布强风暴预警后，该活动出于安全考虑被取消。"
+            },
+            {
+            "expression": "a high/low probability of injury",
+            "meaning": "高/低受伤概率",
+            "example": "Contact sports like rugby have a high probability of injury compared to individual sports.",
+            "translation": "与个人运动相比，橄榄球等接触性运动有高受伤概率。"
+            },
+            {
+            "expression": "life-threatening injuries",
+            "meaning": "危及生命的 injuries",
+            "example": "The mountain climber suffered life-threatening injuries after falling from a cliff.",
+            "translation": "这位登山者从悬崖坠落，遭受了危及生命的 injuries。"
+            },
+            {
+            "expression": "an extreme sport",
+            "meaning": "极限运动",
+            "example": "Surfing big waves in Hawaii is considered an extreme sport due to its high risk.",
+            "translation": "在夏威夷冲浪巨浪因风险高，被视为极限运动。"
+            },
+            {
+            "expression": "essential sports gear",
+            "meaning": "必备运动装备",
+            "example": "Helmets and knee pads are essential sports gear for skateboarders.",
+            "translation": "头盔和护膝是滑板爱好者的必备运动装备。"
+            },
+            {
+            "expression": "take sensible precautions",
+            "meaning": "采取合理预防措施",
+            "example": "Hikers should take sensible precautions like carrying a first-aid kit and checking weather forecasts.",
+            "translation": "徒步旅行者应采取携带急救包、查看天气预报等合理预防措施。"
+            },
+            {
+            "expression": "foster a competitive spirit",
+            "meaning": "培养竞争精神",
+            "example": "Team sports help children foster a competitive spirit while learning cooperation.",
+            "translation": "团队运动帮助孩子在学习合作的同时培养竞争精神。"
+            },
+            {
+            "expression": "the Olympic ideal",
+            "meaning": "奥林匹克精神",
+            "example": "The Olympic ideal emphasizes friendship, respect, and excellence among athletes worldwide.",
+            "translation": "奥林匹克精神强调全球运动员之间的友谊、尊重与卓越。"
+            },
+            {
+            "expression": "a win-at-all-costs attitude",
+            "meaning": "不惜一切代价获胜的态度",
+            "example": "A win-at-all-costs attitude can lead athletes to use unethical methods to gain an advantage.",
+            "translation": "不惜一切代价获胜的态度可能导致运动员使用不道德手段获取优势。"
+            },
+            {
+            "expression": "be disqualified from participating",
+            "meaning": "被取消参赛资格",
+            "example": "The runner was disqualified from participating after testing positive for banned substances.",
+            "translation": "这位跑步者因违禁物质检测呈阳性，被取消参赛资格。"
+            },
+            {
+            "expression": "performance-enhancing drugs",
+            "meaning": "兴奋剂",
+            "example": "The use of performance-enhancing drugs is strictly prohibited in professional sports.",
+            "translation": "在职业体育中，使用兴奋剂被严格禁止。"
+            },
+            {
+            "expression": "fail a drugs test",
+            "meaning": "未通过药检",
+            "example": "The cyclist faced a two-year ban after failing a drugs test during the Tour de France.",
+            "translation": "这位自行车手在环法自行车赛中未通过药检，面临两年禁赛。"
+            },
+            {
+            "expression": "use illegal substances",
+            "meaning": "使用非法物质",
+            "example": "Athletes who use illegal substances risk damaging their health and ruining their careers.",
+            "translation": "使用非法物质的运动员可能损害健康并毁掉职业生涯。"
+            },
+            {
+            "expression": "place too much value on sport",
+            "meaning": "过度重视体育",
+            "example": "Some parents place too much value on sport, putting excessive pressure on their children to win.",
+            "translation": "一些父母过度重视体育，给孩子施加过大的获胜压力。"
+            },
+            {
+            "expression": "a sports fan",
+            "meaning": "体育迷",
+            "example": "As a sports fan, she never misses watching her favorite football team play.",
+            "translation": "作为体育迷，她从不错过观看自己最喜欢的足球队比赛。"
+            },
+            {
+            "expression": "set a record",
+            "meaning": "创造纪录",
+            "example": "The swimmer became the first person to set a record in the 100-meter freestyle at the age of 16.",
+            "translation": "这位游泳运动员在16岁时成为首位创造100米自由泳纪录的人。"
+            },
+            {
+            "expression": "sports coverage",
+            "meaning": "体育报道",
+            "example": "The TV channel provides extensive sports coverage of international events like the Olympics.",
+            "translation": "该电视频道对奥运会等国际赛事提供广泛的体育报道。"
+            },
+            {
+            "expression": "sports commentators",
+            "meaning": "体育评论员",
+            "example": "Sports commentators often provide expert analysis and insights during live matches.",
+            "translation": "体育评论员常在现场比赛中提供专业分析和见解。"
+            },
+            {
+            "expression": "sports merchandising",
+            "meaning": "体育商品销售",
+            "example": "Sports merchandising includes selling team jerseys, hats, and other branded products to fans.",
+            "translation": "体育商品销售包括向球迷出售球队球衣、帽子和其他品牌产品。"
+            },
+            {
+            "expression": "the endorsement of sporting goods",
+            "meaning": "体育用品代言",
+            "example": "Top athletes often earn millions through the endorsement of sporting goods brands.",
+            "translation": "顶级运动员常通过体育用品品牌代言赚取数百万收入。"
+            }
+    ];
+
+        // 词汇数据 - 太空类示例
+        const cosmosData = [
+            {
+            "expression": "the space race",
+            "meaning": "太空竞赛",
+            "example": "The 1960s saw intense competition between the US and the Soviet Union in the space race.",
+            "translation": "20世纪60年代，美国和苏联在太空竞赛中竞争激烈。"
+            },
+            {
+            "expression": "a space probe",
+            "meaning": "太空探测器",
+            "example": "A space probe was sent to Mars to collect soil samples for scientific analysis.",
+            "translation": "一枚太空探测器被送往火星收集土壤样本用于科学分析。"
+            },
+            {
+            "expression": "a lunar module",
+            "meaning": "登月舱",
+            "example": "The Apollo 11 lunar module successfully landed on the moon's surface in July 1969.",
+            "translation": "1969年7月，阿波罗11号登月舱成功登陆月球表面。"
+            },
+            {
+            "expression": "put into orbit",
+            "meaning": "送入轨道",
+            "example": "The new communication satellite was put into orbit by a reusable rocket last week.",
+            "translation": "上周，一颗新的通信卫星由可重复使用火箭送入轨道。"
+            },
+            {
+            "expression": "manned space flight",
+            "meaning": "载人航天飞行",
+            "example": "China has achieved remarkable milestones in manned space flight over the past two decades.",
+            "translation": "过去二十年，中国在载人航天飞行领域取得了显著里程碑式成就。"
+            },
+            {
+            "expression": "launch a space rocket",
+            "meaning": "发射太空火箭",
+            "example": "NASA plans to launch a space rocket to Jupiter's moon Europa in 2024.",
+            "translation": "美国国家航空航天局计划2024年发射一枚太空火箭前往木星的卫星木卫二。"
+            },
+            {
+            "expression": "the cosmos",
+            "meaning": "宇宙",
+            "example": "Astronomers use powerful telescopes to observe distant galaxies in the cosmos.",
+            "translation": "天文学家使用强大的望远镜观测宇宙中的遥远星系。"
+            },
+            {
+            "expression": "pour money into space research",
+            "meaning": "投入大量资金进行太空研究",
+            "example": "Many developed countries pour money into space research to gain technological advantages.",
+            "translation": "许多发达国家投入大量资金进行太空研究以获取技术优势。"
+            },
+            {
+            "expression": "a test flight",
+            "meaning": "试飞",
+            "example": "The new space shuttle completed its first unmanned test flight without any technical issues.",
+            "translation": "新航天飞机顺利完成首次无人试飞，未出现任何技术问题。"
+            },
+            {
+            "expression": "a space shuttle",
+            "meaning": "航天飞机",
+            "example": "The space shuttle carried astronauts and cargo to the International Space Station regularly.",
+            "translation": "航天飞机曾定期将宇航员和货物送往国际空间站。"
+            },
+            {
+            "expression": "a space station",
+            "meaning": "空间站",
+            "example": "The International Space Station has been continuously occupied by astronauts since 2000.",
+            "translation": "国际空间站自2000年以来一直由宇航员持续驻守。"
+            },
+            {
+            "expression": "space voyages",
+            "meaning": "太空航行",
+            "example": "Long-duration space voyages require advanced life support systems to sustain astronauts.",
+            "translation": "长时间太空航行需要先进的生命支持系统来维持宇航员的生存。"
+            },
+            {
+            "expression": "space tourism",
+            "meaning": "太空旅游",
+            "example": "Companies like Virgin Galactic aim to make space tourism accessible to private citizens.",
+            "translation": "维珍银河等公司旨在让普通公民能够参与太空旅游。"
+            },
+            {
+            "expression": "discover the mysteries of the universe",
+            "meaning": "探索宇宙的奥秘",
+            "example": "Modern telescopes help scientists discover the mysteries of the universe beyond our solar system.",
+            "translation": "现代望远镜帮助科学家探索太阳系外宇宙的奥秘。"
+            },
+            {
+            "expression": "space missions",
+            "meaning": "太空任务",
+            "example": "The agency has planned several unmanned space missions to explore distant planets.",
+            "translation": "该机构已规划多项无人太空任务以探索遥远行星。"
+            },
+            {
+            "expression": "the conquest of space",
+            "meaning": "征服太空",
+            "example": "Humanity's pursuit of the conquest of space has driven countless technological innovations.",
+            "translation": "人类对征服太空的追求推动了无数技术创新。"
+            },
+            {
+            "expression": "be an inspiration to",
+            "meaning": "对……是一种激励",
+            "example": "Astronauts' courage and dedication are an inspiration to young people interested in science.",
+            "translation": "宇航员的勇气和奉献精神对对科学感兴趣的年轻人是一种激励。"
+            },
+            {
+            "expression": "spacesuits and helmets",
+            "meaning": "航天服和头盔",
+            "example": "Astronauts must wear spacesuits and helmets to protect themselves in the vacuum of space.",
+            "translation": "宇航员必须穿戴航天服和头盔以在太空真空中保护自己。"
+            },
+            {
+            "expression": "vacuum-packed food",
+            "meaning": "真空包装食品",
+            "example": "Vacuum-packed food is essential for astronauts to maintain nutrition during long missions.",
+            "translation": "真空包装食品对宇航员在长期任务中维持营养至关重要。"
+            },
+            {
+            "expression": "weightless conditions",
+            "meaning": "失重状态",
+            "example": "Astronauts often experience muscle loss under weightless conditions in space.",
+            "translation": "宇航员在太空的失重状态下经常会经历肌肉流失。"
+            },
+            {
+            "expression": "endure hardships and discomforts",
+            "meaning": "忍受艰难困苦",
+            "example": "Astronauts must endure hardships and discomforts to complete their space missions.",
+            "translation": "宇航员必须忍受艰难困苦才能完成他们的太空任务。"
+            },
+            {
+            "expression": "float through space",
+            "meaning": "在太空中漂浮",
+            "example": "Astronauts can float through space freely when they are outside the space station.",
+            "translation": "宇航员在空间站外时可以在太空中自由漂浮。"
+            },
+            {
+            "expression": "zero gravity",
+            "meaning": "零重力",
+            "example": "Experiments in zero gravity help scientists study the effects of microgravity on living organisms.",
+            "translation": "零重力实验帮助科学家研究微重力对生命体的影响。"
+            },
+            {
+            "expression": "satellite technology",
+            "meaning": "卫星技术",
+            "example": "Satellite technology enables global navigation and real-time weather monitoring.",
+            "translation": "卫星技术实现了全球导航和实时天气监测。"
+            },
+            {
+            "expression": "a spin-off",
+            "meaning": "衍生技术",
+            "example": "Memory foam is a well-known spin-off from NASA's space research programs.",
+            "translation": "记忆泡沫是美国国家航空航天局太空研究项目的著名衍生技术。"
+            },
+            {
+            "expression": "make space travel commercially viable",
+            "meaning": "使太空旅行具有商业可行性",
+            "example": "Private companies are working to make space travel commercially viable for ordinary people.",
+            "translation": "私营企业正努力使太空旅行对普通人具有商业可行性。"
+            },
+            {
+            "expression": "the quest for a new homeland",
+            "meaning": "寻找新家园的探索",
+            "example": "The quest for a new homeland in space is a long-term goal for human civilization.",
+            "translation": "在太空寻找新家园的探索是人类文明的长期目标。"
+            },
+            {
+            "expression": "alien life forms",
+            "meaning": "外星生命形式",
+            "example": "Scientists are searching for signs of alien life forms on Mars and other planets.",
+            "translation": "科学家正在火星和其他行星上寻找外星生命形式的迹象。"
+            },
+            {
+            "expression": "extraterrestrial life",
+            "meaning": "地外生命",
+            "example": "The existence of extraterrestrial life remains one of the biggest mysteries in science.",
+            "translation": "地外生命的存在仍然是科学上最大的谜团之一。"
+            },
+            {
+            "expression": "in the realm of science fiction",
+            "meaning": "在科幻领域",
+            "example": "Interstellar colonization was once only in the realm of science fiction but is now being explored.",
+            "translation": "星际殖民曾经只存在于科幻领域，但现在正被探索。"
+            }
+        ];
+
+    // 词汇数据 - 全球化类示例
+        const globalizationData = [
+            {
+            "expression": "globalization",
+            "meaning": "全球化",
+            "example": "Globalization has connected economies and cultures across the world.",
+            "translation": "全球化将世界各地的经济和文化联系在一起。"
+            },
+            {
+            "expression": "international trade",
+            "meaning": "国际贸易",
+            "example": "International trade allows countries to access goods they cannot produce locally.",
+            "translation": "国际贸易使各国能够获得本地无法生产的商品。"
+            },
+            {
+            "expression": "promote cultural exchange",
+            "meaning": "促进文化交流",
+            "example": "Student exchange programs promote cultural exchange between nations.",
+            "translation": "学生交换项目促进国家间的文化交流。"
+            },
+            {
+            "expression": "global governance",
+            "meaning": "全球治理",
+            "example": "The United Nations plays a key role in global governance.",
+            "translation": "联合国在全球治理中发挥关键作用。"
+            },
+            {
+            "expression": "multinational corporations",
+            "meaning": "跨国公司",
+            "example": "Multinational corporations operate in multiple countries around the globe.",
+            "translation": "跨国公司在全球多个国家开展业务。"
+            },
+            {
+            "expression": "strengthen international cooperation",
+            "meaning": "加强国际合作",
+            "example": "Countries must strengthen international cooperation to fight pandemics.",
+            "translation": "各国必须加强国际合作以应对疫情。"
+            },
+            {
+            "expression": "free trade agreements",
+            "meaning": "自由贸易协定",
+            "example": "Free trade agreements reduce tariffs between signatory countries.",
+            "translation": "自由贸易协定降低签署国之间的关税。"
+            },
+            {
+            "expression": "cross-cultural communication",
+            "meaning": "跨文化沟通",
+            "example": "Cross-cultural communication skills are essential for global professionals.",
+            "translation": "跨文化沟通技能对全球专业人士至关重要。"
+            },
+            {
+            "expression": "global citizenship",
+            "meaning": "全球公民意识",
+            "example": "Education should foster global citizenship among young people.",
+            "translation": "教育应培养年轻人的全球公民意识。"
+            },
+            {
+            "expression": "boost global trade",
+            "meaning": "促进全球贸易",
+            "example": "Digital platforms help boost global trade by connecting buyers and sellers worldwide.",
+            "translation": "数字平台通过连接全球买卖双方促进全球贸易。"
+            },
+            {
+            "expression": "address climate change",
+            "meaning": "应对气候变化",
+            "example": "World leaders meet annually to address climate change issues.",
+            "translation": "世界各国领导人每年会晤以应对气候变化问题。"
+            },
+            {
+            "expression": "facilitate cross-border investment",
+            "meaning": "便利跨境投资",
+            "example": "Simplified visa rules facilitate cross-border investment in the tech sector.",
+            "translation": "简化的签证规则便利了科技领域的跨境投资。"
+            },
+            {
+            "expression": "resolve diplomatic disputes",
+            "meaning": "解决外交争端",
+            "example": "Mediation efforts help resolve diplomatic disputes peacefully.",
+            "translation": "调解努力有助于和平解决外交争端。"
+            },
+            {
+            "expression": "support developing countries",
+            "meaning": "支持发展中国家",
+            "example": "International organizations provide aid to support developing countries.",
+            "translation": "国际组织提供援助以支持发展中国家。"
+            },
+            {
+            "expression": "enhance global connectivity",
+            "meaning": "增强全球连通性",
+            "example": "5G technology will enhance global connectivity in remote areas.",
+            "translation": "5G技术将增强偏远地区的全球连通性。"
+            },
+            {
+            "expression": "protect human rights",
+            "meaning": "保护人权",
+            "example": "NGOs work globally to protect human rights for vulnerable groups.",
+            "translation": "非政府组织在全球范围内努力保护弱势群体的人权。"
+            },
+            {
+            "expression": "regulate international trade",
+            "meaning": "规范国际贸易",
+            "example": "The WTO helps regulate international trade to ensure fairness.",
+            "translation": "世界贸易组织帮助规范国际贸易以确保公平。"
+            },
+            {
+            "expression": "foster mutual understanding",
+            "meaning": "促进相互理解",
+            "example": "Cultural festivals foster mutual understanding between different communities.",
+            "translation": "文化节促进不同社区之间的相互理解。"
+            },
+            {
+            "expression": "combat transnational crime",
+            "meaning": "打击跨国犯罪",
+            "example": "Interpol collaborates with countries to combat transnational crime.",
+            "translation": "国际刑警组织与各国合作打击跨国犯罪。"
+            },
+            {
+            "expression": "improve diplomatic relations",
+            "meaning": "改善外交关系",
+            "example": "High-level visits help improve diplomatic relations between nations.",
+            "translation": "高层互访有助于改善国家间的外交关系。"
+            },
+            {
+            "expression": "expand market access",
+            "meaning": "扩大市场准入",
+            "example": "Trade negotiations aim to expand market access for agricultural products.",
+            "translation": "贸易谈判旨在扩大农产品的市场准入。"
+            },
+            {
+            "expression": "promote sustainable development",
+            "meaning": "促进可持续发展",
+            "example": "Renewable energy projects promote sustainable development in rural areas.",
+            "translation": "可再生能源项目促进农村地区的可持续发展。"
+            },
+            {
+            "expression": "coordinate disaster relief",
+            "meaning": "协调救灾",
+            "example": "The Red Cross coordinates disaster relief efforts across borders.",
+            "translation": "红十字会协调跨境救灾工作。"
+            },
+            {
+            "expression": "reduce trade barriers",
+            "meaning": "减少贸易壁垒",
+            "example": "Tariff cuts help reduce trade barriers between trading partners.",
+            "translation": "关税削减有助于减少贸易伙伴之间的贸易壁垒。"
+            },
+            {
+            "expression": "encourage foreign investment",
+            "meaning": "鼓励外国投资",
+            "example": "Tax incentives encourage foreign investment in the manufacturing sector.",
+            "translation": "税收优惠鼓励制造业的外国投资。"
+            },
+            {
+            "expression": "bridge cultural gaps",
+            "meaning": "弥合文化差距",
+            "example": "Language training programs bridge cultural gaps between employees from different countries.",
+            "translation": "语言培训项目弥合来自不同国家员工之间的文化差距。"
+            },
+            {
+            "expression": "standardize global regulations",
+            "meaning": "标准化全球法规",
+            "example": "Health organizations work to standardize global regulations for drug safety.",
+            "translation": "卫生组织努力标准化全球药品安全法规。"
+            },
+            {
+            "expression": "share technological expertise",
+            "meaning": "分享技术专长",
+            "example": "Developed countries should share technological expertise with developing nations.",
+            "translation": "发达国家应与发展中国家分享技术专长。"
+            },
+            {
+            "expression": "promote fair trade practices",
+            "meaning": "促进公平贸易实践",
+            "example": "Certification programs promote fair trade practices for coffee farmers.",
+            "translation": "认证项目促进咖啡农的公平贸易实践。"
+            },
+            {
+            "expression": "strengthen cross-border healthcare cooperation",
+            "meaning": "加强跨境医疗合作",
+            "example": "Countries in the region strengthen cross-border healthcare cooperation to fight infectious diseases.",
+            "translation": "该地区各国加强跨境医疗合作以应对传染病。"
+            }
+        ];
+
+        // 话题数据映射
+        const topicData = {
+            education: educationData,
+            work: workData,
+            environment: environmentData,            
+            culture: cultureData,           
+            health: healthData,
+            technology: technologyData,
+            government: governmentData,
+            crime: crimeData,
+            media: mediaData,
+            society: societyData,
+            business: businessData,
+            sport: sportData,
+            cosmos: cosmosData,
+            globalization: globalizationData
+        };
+
+        // 教育类翻译练习句子
+        const educationSentences = [
             "政府应划拨足够资金支持终身学习，让成年人在技术快速发展的背景下更新职业技能。",
             "互动课堂讨论通过鼓励学生分析论点和质疑假设，有助于培养批判性思维。",
-            "学校必须推广全纳教育，确保残疾学生平等获得优质学习机会。",
-            "投资STEM教育对培养未来能推动科学、技术、工程和数学领域进步的创新者至关重要。",
+            "学校必须推广包容性教育，确保残疾学生平等获得优质学习机会。",
+            "随着人工智能接管越来越多的常规业务和技术任务，专家们表示，人文教育的价值将会上升。",
             "应扩大职业培训项目，以弥合学术学习与行业对技能人才需求之间的差距。",
             "教育当局常进行标准化测试，以评估各地区学生的整体学业表现。",
             "远程学习已成为传统课堂的灵活替代方案，尤其在新冠疫情等全球危机期间。",
@@ -615,6 +3270,468 @@
             "学校必须推广数字素养，帮助学生安全上网并负责任地使用技术。"
         ];
 
+
+        //职场类翻译句子
+        const workSentences = [
+            "长期过重的工作量和缺乏工作与生活的平衡，常导致金融和医疗等高压力行业的专业人士出现职业倦怠。",
+            "缩小性别薪资差距需要政府执行同工同酬立法，以及企业定期进行薪资审计以消除歧视性做法。",
+            "新冠疫情期间远程工作的广泛采用，证明了其在提高生产力同时降低员工通勤成本方面的潜力。",
+            "有效的调解和开放的沟通渠道对于解决职场冲突和维持和谐的团队环境至关重要。",
+            "为保护弱势工人，政府必须制定劳动法规，设定最低工资标准并禁止无正当理由的不公平解雇。",
+            "通过提供灵活工时和带薪育儿假来优先考虑工作与生活平衡的企业，往往拥有更高的员工留存率。",
+            "重视透明度和员工福祉的积极企业文化，能显著提升工作满意度和团队士气。",
+            "促进职场多样性不仅能培养创新，还能帮助企业更好地理解和服务更广泛的客户群体。",
+            "对成就的认可和职业成长机会是维持员工积极性和参与度的关键因素。",
+            "定期安全培训和严格遵守职业健康标准，对于确保制造工厂的职场安全至关重要。",
+            "组织团队建设活动和鼓励协作解决问题，能有效培养同事间的团队精神。",
+            "企业应通过提供导师计划和资助专业认证来促进员工的职业发展。",
+            "根据员工优势和专业知识有效分配任务的管理者，能提高团队整体生产力并减少不必要的压力。",
+            "使用Asana或Trello等项目管理工具，能简化协作流程并确保团队成员间的清晰沟通。",
+            "为解决劳动力市场的技能差距，政府应提供针对可再生能源等高需求行业的职业培训项目。",
+            "分配跨职能项目有助于加强部门间的相互依赖，从而提升组织的整体整合性和效率。",
+            "投资符合人体工程学的办公家具和适当通风，对于改善工作条件和减少员工健康问题至关重要。",
+            "营造容忍失败并奖励创造性解决方案的文化，能鼓励员工的创新思维。",
+            "专注于具体问题而非个人批评的建设性沟通，是解决职场分歧的关键。",
+            "定期反馈会议和共同设定目标，能通过将个人努力与集体目标对齐来增强团队合作。",
+            "高效的领导者会利用团队成员的不同优势来应对复杂挑战并推动创新。",
+            "为实现组织成功，管理者必须将团队目标与公司的长期战略目标对齐。",
+            "企业可通过实施确保领导层性别平等代表权和消除招聘偏见的政策，来促进性别平等。",
+            "定期检查和强制性安全演练对于加强职业安全和预防职场事故是必要的。",
+            "参与管理培训项目和在项目中担任领导角色，有助于员工培养领导能力。",
+            "设定现实的截止日期和适当委派任务，是管理工作量和避免倦怠的有效策略。",
+            "建立跨部门任务小组能促进跨部门协作，并打破组织内部的壁垒。",
+            "为吸引和留住顶尖人才，许多企业现在实施灵活的工作安排，如压缩工作周或混合工作模式。",
+            "使用客观指标和360度反馈系统，有助于管理者公平评估绩效并提供可操作的改进建议。",
+            "在项目开始时明确角色和职责，可避免混乱并确保所有团队成员了解其任务。"
+        ];
+
+        //环保类翻译句子
+        const environmentSentences = [
+            "许多发展中地区的无监管工厂未经处理就向附近水体排放化学废物，导致严重的水污染并威胁水生生物。",
+            "快速城市化和森林砍伐加速了热带地区的环境恶化，降低了地球的碳吸收能力。",
+            "所有国家必须通过减少温室气体排放和向清洁能源转型，立即针对全球变暖采取行动。",
+            "政府应强制使用可生物降解包装，以减少垃圾填埋场中的持久性废物。",
+            "煤炭和石油的过度开采正以不可持续的速度耗尽自然资源。",
+            "过去含氯氟烃（CFCs）的使用导致臭氧层损耗，增加了紫外线辐射暴露。",
+            "海洋酸化导致的珊瑚礁消失标志着一场需要全球干预的生态危机。",
+            "选择公共交通而非私家车有助于减少个人碳足迹。",
+            "更严格的法规迫使企业减少二氧化硫和氮氧化物的排放。",
+            "投资太阳能和风能是应对气候变化和实现碳中和的关键。",
+            "各国必须减少对化石燃料的依赖，以确保长期环境可持续性。",
+            "植树造林项目缓解了土壤侵蚀和空气污染等环境问题。",
+            "联合国应大力支持全球禁止一次性塑料的努力。",
+            "国际机构必须让企业对非法伐木和石油泄漏负责。",
+            "平衡经济增长与环境保护对于实现可持续发展至关重要。",
+            "阳光充足的国家应优先发展太阳能等替代能源。",
+            "选择本地食物减少了食物里程和相关碳排放。",
+            "圈养繁殖拯救了大熊猫免于灭绝。",
+            "大多数环境问题源于森林砍伐、过度捕捞和化石燃料燃烧。",
+            "开发者在建造水坝前必须进行环境影响评估。",
+            "人类活动通过增加温室气体浓度加剧了温室效应。",
+            "全球变暖导致海平面上升，威胁沿海地区和小岛屿国家。",
+            "城市扩张导致的栖息地破坏是生物多样性下降的主要原因。",
+            "保护区保护濒危物种免受人类干扰。",
+            "远东豹濒临灭绝，野外仅存不到100只个体。",
+            "风能和水能等可再生能源减少了碳排放。",
+            "沿海风力发电场是受欢迎的清洁能源来源。",
+            "消费者应选择可重复使用容器等环保产品。",
+            "有毒废物的不当处理污染了土壤和地下水。",
+            "绿色运动提高了公众意识并推动了环境政策变革。"
+        ];
+
+        //文化类翻译句子
+        const cultureSentences = [
+            "地方政府应资助职业培训项目以传承传统工艺，确保蜡染等技艺为后代保留。",
+            "学校可通过举办展示学生群体中所有民族传统的活动，促进文化包容性。",
+            "传统工匠与科技初创企业的合作推动文化创新，催生基于古老技艺的数字艺术作品。",
+            "当移民为融入社会而采纳东道国的语言和习俗时，文化同化往往会发生。",
+            "孝道和集体责任等传统价值观，在许多亚洲社会仍是社会凝聚力的核心。",
+            "语言组织通过记录地方方言和开发教育材料，倡导保护方言多样性。",
+            "多元文化社会得益于多样视角，这些视角提升了职场和社区的创造力与问题解决能力。",
+            "联合国教科文组织非物质文化遗产名录包含日本茶道等实践，认可其在全球文化多样性中的作用。",
+            "快餐连锁店和好莱坞电影的全球传播，导致发展中国家出现文化同质化现象。",
+            "爱尔兰踢踏舞等民间传统不仅是娱乐形式，也是历史叙事和社区身份的载体。",
+            "国际艺术展通过让不同国家的艺术家分享作品和思想，促进文化交流。",
+            "当地社区通过庆祝包含仪式舞蹈和传统美食的年度节日，保护传统习俗。",
+            "学习传统音乐和舞蹈帮助年轻人增强文化身份认同，培养对社区的归属感。",
+            "跨文化交流工作坊通过教导参与者识别和尊重文化差异，弥合文化鸿沟。",
+            "政府必须执行严格法律，保护文化遗产地免受非法挖掘和破坏。",
+            "企业多样性政策通过雇佣不同背景的员工和推广包容性实践，鼓励文化多样性。",
+            "社交媒体平台让个人能在全球传播文化价值观，将拥有共同信仰的人跨边界联系起来。",
+            "建筑师在可持续建筑中融合传统与现代元素，将传统材料与当代设计原则结合。",
+            "公平贸易倡议通过确保本地工匠的手工纺织品和陶器获得合理报酬，支持他们。",
+            "社区主导的项目通过组织游行和工作坊（向年轻人传授文化根源），复兴传统节日。",
+            "国际学生交换项目通过让学生与寄宿家庭同住并体验他国日常生活，促进跨文化理解。",
+            "土著社区通过抵制外部影响和保留传统生活方式，保持文化独特性。",
+            "泰国等国家通过提供古寺和传统村落的导览，促进文化旅游。",
+            "中法艺术家通过合作创作融合中国水墨画与法国印象派的壁画项目，交流文化实践。",
+            "韩日之间共享的文化遗产加强了文化联系，促进了艺术和教育领域的更多合作。",
+            "博物馆通过解释文物历史和意义的互动展览，向公众开展文化遗产教育。",
+            "许多国家通过资助推广本土语言和传统的地方媒体，抵制文化同质化。",
+            "世界各地的城市庆祝中国新年等文化节日，吸引游客并培养社区精神。",
+            "政府可通过投资电影制作和音乐节来发展文化产业，创造就业并促进经济增长。",
+            "公共艺术装置和社区剧院通过为所有居民提供可及的文化体验，丰富文化生活。"
+        ];
+
+        //健康类翻译句子
+        const healthSentences = [
+            "政府应资助公共意识宣传活动，向公民普及糖尿病的风险因素，如过量糖分摄入和久坐生活方式。",
+            "学校应将心理健康教育纳入课程，帮助学生识别情绪困扰的早期迹象并及时寻求专业支持。",
+            "长期暴露于空气污染和不健康饮食习惯是心脏病、中风等慢性疾病发病率上升的主要原因。",
+            "富含水果、蔬菜、全谷物和瘦肉蛋白的均衡饮食对于维持最佳身体健康和预防营养缺乏至关重要。",
+            "采用久坐生活方式的办公室职员患肥胖症、背痛和心血管疾病的风险更高。",
+            "投资清洁供水和卫生系统是改善发展中国家公共卫生的基石。",
+            "健康素养项目使个人能够就自身健康做出明智决策，例如选择合适的药物或识别疾病症状。",
+            "全民医疗保险确保所有公民，无论收入水平如何，都能获得基本医疗服务而不面临经济困难。",
+            "练习正念冥想和定期体育锻炼是减轻职场焦虑的有效压力管理技巧。",
+            "充足睡眠和营养丰富的饮食对于增强免疫系统抵御感染和疾病至关重要。",
+            "全球肥胖流行与高热量加工食品的广泛普及和体力活动水平下降有关。",
+            "地方当局应建造更多公园和步行道，以促进各年龄段居民的体力活动。",
+            "雇主可通过提供灵活工作时间和心理健康咨询服务来降低员工的压力水平。",
+            "营养师建议用白开水替代含糖饮料并增加纤维摄入，以改善饮食习惯和预防消化问题。",
+            "定期健康筛查和疫苗接种是预防癌症和高血压等慢性疾病的关键策略。",
+            "参与社交活动和培养爱好可通过减少孤独感来提升心理健康。",
+            "维生素C和锌补充剂常被推荐用于在感冒和流感季节增强免疫功能。",
+            "社交媒体宣传活动可有效提高公众对定期洗手和卫生习惯重要性的健康意识。",
+            "农村社区往往缺乏医疗设施，因此政府应通过流动诊所和远程医疗服务提供可及的医疗保健。",
+            "在工作和个人生活之间设定明确界限对于管理工作与生活平衡和避免倦怠至关重要。",
+            "学校可通过禁止食堂销售垃圾食品和组织每日体育课来鼓励健康行为。",
+            "政府应拨出更多资金支持心理健康服务，包括危机热线和社区咨询中心。",
+            "睡前避免使用电子设备和保持规律的睡眠时间表有助于调节睡眠模式和提高睡眠质量。",
+            "高血压等慢性病患者应使用家用血压计定期监测自身健康状况。",
+            "医疗专业人员应向父母普及营养知识，确保儿童获得均衡饮食以促进健康成长和发育。",
+            "对含糖饮料和快餐征税是降低青少年肥胖率的有效政策。",
+            "医疗当局必须公平分配医疗资源，优先考虑老年人和低收入家庭等弱势群体。",
+            "采用健康生活方式（包括定期锻炼和不吸烟）的人患慢性疾病的风险更低。",
+            "工作场所应通过创造支持性环境来解决心理健康问题，让员工敢于讨论自身情感需求。",
+            "通过疫苗接种和卫生习惯促进疾病预防的公共卫生宣传活动可显著减轻医疗系统的负担。"
+            ];
+        
+        //科技类翻译句子
+        const technologySentences = [
+            "许多科技公司大力投资尖端技术以保持竞争优势。",
+            "人工智能（AI）正在彻底改变从医疗到金融的各个行业。",
+            "零售业加快了数字化转型以满足不断变化的消费者需求。",
+            "企业必须不断更新系统以抵御网络安全威胁。",
+            "大学与行业合作开发可持续能源的新技术。",
+            "政府拨款帮助促进中小企业的创新。",
+            "大数据分析使企业能够深入了解客户行为模式。",
+            "IT团队迅速工作以实施系统故障的解决方案。",
+            "科技公司需要解决隐私问题以建立用户信任。",
+            "制造业的工作自动化提高了效率，但也导致了岗位流失。",
+            "虚拟现实（VR）被用于外科医生的培训项目，以练习复杂手术。",
+            "基于云的工具帮助简化流程并减少行政工作量。",
+            "企业必须加密敏感信息以确保数据安全。",
+            "网络管理员监控性能以确保系统平稳运行。",
+            "AI算法通过在智能电网中高效分配能源来优化资源。",
+            "视频会议工具促进远程团队之间的沟通。",
+            "投资5G网络有助于加强数字服务的基础设施。",
+            "预测性维护使用物联网最小化设备故障风险并降低成本。",
+            "营销团队分析趋势以创建针对客户的定向活动。",
+            "由于预算和资源有限，小企业采用技术的速度较慢。",
+            "政府需要规范社交媒体的使用以防止虚假信息。",
+            "投资模块化系统有助于使技术面向未来，抵御快速过时。",
+            "新加坡等国家正转向科技驱动型经济以促进增长。",
+            "过度依赖技术可能导致批判性思维能力的丧失。",
+            "机器学习算法为流媒体平台的推荐系统提供动力。",
+            "学校应教授数字素养以帮助学生安全地浏览网络世界。",
+            "城乡之间的数字鸿沟限制了在线教育的获取。",
+            "人工智能中的伦理困境包括面部识别系统中的偏见等问题。",
+            "精通科技的一代更习惯于使用数字工具进行工作和休闲。",
+            "应用程序的持续通知导致信息过载并降低生产力。"
+        ];
+
+        //政府类翻译句子
+        const governmentSentences = [
+            "所有公民和机构必须遵守宪法，以确保国家政治体系的稳定与合法性。",
+            "议会民主制允许公民选举代表，这些代表随后组成政府，代表公民制定法律和政策。",
+            "为维护国际公信力，各国政府必须遵守与其他国家签署的条约和协议。",
+            "宪政政府在成文宪法的框架内运作，宪法明确规定了各治理分支的权力与责任。",
+            "由总统或首相领导的行政分支负责执行立法分支通过的法律。",
+            "立法分支通常由民选议员组成，有权起草、辩论和颁布新法律。",
+            "行政、立法和司法分支之间的权力分立，防止任何单一群体获得过度权力。",
+            "为应对气候变化，许多国家已采取政策减少碳排放并推广可再生能源。",
+            "经济衰退期间，政府通常会对非必要服务实施开支削减，以减少预算赤字。",
+            "一些政府选择提高奢侈品税，为社会福利项目筹集额外资金。",
+            "为控制通货膨胀，中央银行可能建议政府限制基础设施项目的公共支出。",
+            "有效的治理要求政府将资源分配给直接改善公民生活质量的领域，如医疗和教育。",
+            "为应对公共卫生危机，政府可能会对公共集会实施限制，以防止疾病传播。",
+            "批评者认为，过度的监控措施可能侵犯公民的隐私权，违反基本人权。",
+            "减少青年失业长期以来是政府的优先事项，因为它直接影响社会稳定和经济增长。",
+            "发展中国家通常优先将支出用于道路和供水系统等基础基础设施，以支持长期发展。",
+            "政府已承诺为可再生能源研究提供资金，以减少对化石燃料的依赖。",
+            "在即将到来的大选前，解决收入不平等问题是许多政党的重要议程。",
+            "环保活动人士经常向政府施压，要求其立即采取行动应对气候变化。",
+            "受拟议高速公路项目影响的当地居民决定成立一个压力团体，向政府表达他们的关切。",
+            "为支持国内农业，政府可能向农民提供公共补贴，以抵消种子和化肥的成本。",
+            "联合国等国际机构在调解冲突和促进全球合作方面发挥着关键作用。",
+            "国家和地方当局必须密切合作，确保教育和医疗等公共服务对所有公民开放。",
+            "非政府组织（NGOs）经常与政府合作，在受自然灾害影响的地区提供人道主义援助。",
+            "公民社会团体继续为更严格的枪支管制法律而运动，以减少城市地区的暴力犯罪数量。",
+            "政府决策的透明度有助于建立公众信任，并确保政策反映民众的需求。",
+            "为应对公共健康关切，政府决定正式禁止销售一次性塑料产品。",
+            "政府对艺术展览和音乐节等文化活动的赞助有助于保护国家遗产和促进创造力。",
+            "福利国家为公民提供安全保障，包括失业救济、医疗保健和住房援助等支持。",
+            "政府推出了公共交通临时补贴，作为缓解低收入通勤者经济负担的权宜之计。"
+        ];
+        
+        //犯罪类翻译句子
+        const crimeSentences = [
+            "激情犯罪（如因无法控制的愤怒或嫉妒而实施的谋杀）通常会因缺乏预谋和犯罪意图减弱而被法庭从轻量刑。",
+            "根据该国刑事司法法律，被判持械抢劫罪的罪犯必须服至少10年的强制性监禁刑期。",
+            "来自低收入背景、缺乏教育和就业机会的年轻人更有可能转向犯罪或毒品作为生存手段。",
+            "许多政客主张通过增加警察资金和对暴力犯罪实施更严厉的惩罚来严厉打击犯罪。",
+            "被告以证据不足和审判过程中的程序错误为由，决定对有罪判决提出上诉。",
+            "法官在确定适当刑期时，必须考虑被告的前科记录和悔罪表现。",
+            "教授职业技能和社会责任的监狱教育项目有助于罪犯在释放后重新融入社会。",
+            "批评者认为，对非暴力犯罪减轻量刑等同于对犯罪手软，可能会助长累犯行为。",
+            "学校对持有毒品采取零容忍政策，显著减少了城市地区学生的药物滥用现象。",
+            "社区服务等非监禁刑比短期监禁更能给初犯者提供改过自新的机会。",
+            "刑满释放后，这位前罪犯决定投身社会工作，帮助其他刑满释放人员重建生活。",
+            "政府资助的重返社会项目提供住房、职业培训和咨询服务，帮助刑满释放人员重新开始生活，避免再次犯罪。",
+            "长期监禁和高额罚款的威胁旨在对潜在的白领罪犯（如贪污犯和诈骗犯）起到威慑作用。",
+            "表现良好且完成改造项目的囚犯在服刑一半后，有资格获得假释重返社会。",
+            "大多数发达国家已禁止在学校和监狱中使用体罚，因其侵犯人权且可能造成身心伤害。",
+            "国际执法机构密切合作打击跨境毒品贩运，重点打击走私路线和犯罪网络。",
+            "初犯轻微盗窃罪的罪犯可能会被判处非监禁刑（如缓刑或社区服务），而非监禁。",
+            "在检方出示大量证据证明被告与受害者死亡有关后，被告被判过失杀人罪成立。",
+            "参与仇恨犯罪的人将受到法律的严惩，包括长期监禁和永久犯罪记录。",
+            "政府决定禁止使用一次性塑料袋，以减少环境污染并推广可持续做法。",
+            "DNA样本和指纹分析等法医证据对于在现代法庭案件中排除合理怀疑定罪罪犯至关重要。",
+            "守法公民有权在社区中感到安全，这需要有效的警务和严格的刑法执行。",
+            "警察部队必须公正执法，不得因种族、性别或社会经济地位而歧视。",
+            "关于死刑的争论集中在其伦理意义、威慑效果以及处决无辜者的风险上。",
+            "从犯罪现场收集的法医证据在识别肇事者和确保定罪方面发挥了关键作用。",
+            "许多城市选择在公共场所安装监控摄像头，以威慑犯罪并协助执法部门破案。",
+            "青少年罪犯通常会被缓刑而非送进监狱，因为这让他们能留在社区接受指导和监督。",
+            "刑事司法系统的主要目的是惩罚违法者、保护公众，并改造罪犯以预防未来犯罪。",
+            "如果警方有合理理由相信某人已实施或即将实施犯罪，则有权逮捕嫌疑人。",
+            "法官在作出裁决时必须严格遵守法律条文，即使结果看似严厉或与公众意见不一致。"
+        ];
+
+        //媒体类翻译句子
+        const mediaSentences = [
+            "大众媒体在塑造公众对气候变化等社会问题的舆论方面发挥着关键作用。",
+            "数字广告因其能精准定位特定受众而比传统方法更有效。",
+            "Instagram和TikTok等社交媒体平台被品牌广泛用于向年轻消费者推广产品。",
+            "基于用户浏览历史的定向广告常引发对在线隐私侵犯的担忧。",
+            "学校应教授媒体素养，帮助学生区分网络上可靠与误导性的信息。",
+            "通过社交媒体传播的假新闻可能对政治稳定和公众信任产生严重后果。",
+            "成功的广告campaign通常结合创意视觉与情感叙事，以引起受众共鸣。",
+            "名人代言常被用于提高品牌认知度和吸引新客户。",
+            "媒体对年轻人身体形象的影响一直是心理学家和教育工作者争论的话题。",
+            "许多用户不知道社交媒体公司如何收集和使用他们的个人数据，这威胁到他们的在线隐私。",
+            "名人代言能显著提升销量，但如果名人形象受损也会带来风险。",
+            "电视节目中的商业广告时段常因过长且打断观看体验而受到批评。",
+            "媒体审查是一个有争议的问题，因为它在保护公共利益和限制言论自由之间寻求平衡。",
+            "病毒式营销依赖用户自愿分享内容，使其成为接触大量受众的经济有效方式。",
+            "广告常使用心理策略影响消费者行为，鼓励冲动购买。",
+            "关于产品效果的误导性声明违反广告伦理，可能导致法律处罚。",
+            "报纸和电视等传统媒体对老一辈仍有重要影响。",
+            "社交媒体的内容创作需要了解目标受众的偏好和兴趣。",
+            "媒体饱和意味着消费者每天接触数百条广告，使品牌更难脱颖而出。",
+            "电影和电视节目中的产品植入是一种微妙的广告形式，无需明显的商业时段即可接触受众。",
+            "公益广告（PSAs）旨在提高对反吸烟和道路安全等社会问题的认识。",
+            "批评者认为，一些新闻机构通过偏袒特定政党或意识形态表现出媒体偏见。",
+            "网红营销近年来发展迅速，品牌与社交媒体网红合作推广产品。",
+            "GDPR等新法规旨在通过让用户更能控制个人信息来保护其数据隐私。",
+            "广告法规禁止虚假或欺骗性声明，以确保公平竞争和保护消费者。",
+            "媒体融合指不同媒体形式（如印刷、广播和数字）整合成单一平台的过程。",
+            "媒体常通过鼓励人们购买更多产品以获得幸福和成功来推广消费主义。",
+            "互动广告允许用户参与内容（如测验或投票），使广告体验更难忘。",
+            "媒体责任包括提供准确信息和避免耸人听闻，以维持公众信任。",
+            "许多用户愿意为无广告内容付费，以享受不间断的观看或阅读体验。"
+            ];
+
+        //社会类翻译句子
+        const societySentences = [
+            "许多发达国家正面临人口老龄化的挑战，这给其医疗体系和养老金计划带来了日益增长的压力。",
+            "城市地区的收入不平等往往导致社会动荡，阻碍国家的整体发展。",
+            "发展中国家的快速城市化导致城市过度拥挤，公共资源紧张。",
+            "多元文化社会通过汇集不同的视角和传统，可以促进创造力和创新。",
+            "健全的社会保障体系对于在经济低迷时期保护弱势群体免受贫困和困境至关重要。",
+            "在工作场所促进性别平等可以通过挖掘女性劳动力的全部潜力来提高经济生产力。",
+            "城市扩张不仅消耗宝贵的农业用地，还导致空气污染和交通拥堵加剧。",
+            "政府应通过投资可再生能源和减少碳排放来优先考虑环境保护。",
+            "通过社区活动和志愿者项目鼓励居民互动，可以增强社区凝聚力。",
+            "特大城市的高人口密度往往导致教育和医疗等公共服务不足。",
+            "扩大公共交通网络是缓解城市交通拥堵的有效方法。",
+            "实施尊重文化多样性的包容政策是在多元社会中促进社会和谐的关键。",
+            "增加绿色空间和娱乐设施的可及性可以显著提高城市居民的生活质量。",
+            "投资教育和职业培训项目对于减少贫困和打破代际劣势循环至关重要。",
+            "加强医疗和教育等公共服务对于建设繁荣公平的社会至关重要。",
+            "采用循环经济模式可以通过减少浪费和提高资源效率来推动可持续发展。",
+            "升级道路和铁路等基础设施可以通过改善连通性和降低运输成本来刺激经济增长。",
+            "政府应为老年人和残疾人等弱势群体提供财政补贴和社会支持。",
+            "建设保障性住房是解决高需求城市地区住房短缺的切实办法。",
+            "提供语言课程和文化交流项目可以促进移民社区之间的文化融合。",
+            "国际合作对于应对气候变化和减少温室气体排放的全球影响至关重要。",
+            "安装先进的监控系统和增加警察巡逻可以提升城市社区的公共安全。",
+            "通过移动诊所和远程医疗服务可以扩大农村地区的医疗可及性。",
+            "学校应鼓励学生参与志愿服务，培养他们的社会责任感和社区参与意识。",
+            "有效的城市规划对于规范城市增长和防止城市无节制扩张是必要的。",
+            "弥合数字鸿沟需要政府为农村和低收入社区提供负担得起的互联网接入。",
+            "保护文化遗产地对于保存国家历史和维护其文化身份至关重要。",
+            "实施计划生育政策是管理人口增长和减少资源压力的有效方法。",
+            "为所有公民提供平等的教育机会可以提升经济流动性，减少代际贫困。",
+            "投资现代农业技术和可持续农业实践可以确保不断增长的全球人口的粮食安全。"
+        ];
+
+        //商业类翻译句子
+        const businessSentences = [
+            "做战略决策时，企业领导者应考虑市场趋势。",
+            "这家中国电子品牌去年成功打入东南亚市场。",
+            "可靠的合作伙伴总会信守承诺，以维持长期合作。",
+            "经过三轮谈判，双方最终就合同条款达成共识。",
+            "小企业应充分利用社交媒体平台扩大客户群。",
+            "由于电子商务兴起，许多传统书店停业倒闭。",
+            "推出新产品前，企业必须做全面市场调研以了解消费者需求。",
+            "为度过经济低迷期，公司不得不削减非必要开支。",
+            "项目经理需管理期望，避免承诺过多而交付不足。",
+            "财务团队必须精确计算项目的投资回报率。",
+            "部分客户拖欠付款，给公司现金流带来压力。",
+            "这家房地产公司在拍卖会上以折扣价买下了这栋商业楼。",
+            "他因忽视市场反馈，浪费了拓展业务的黄金机会。",
+            "租金、水电费和办公用品是公司每月运营成本的一部分。",
+            "这家全球零售巨头上月宣布收购一家本地连锁超市。",
+            "两家制药公司合并后成为行业领导者。",
+            "员工在年末财务审计期间常面临繁重的工作量。",
+            "公司向受产品召回影响的客户提供了经济补偿。",
+            "该公司2023年年度收入首次达到100亿美元。",
+            "白领通常在办公室从事专业或行政工作。",
+            "蓝领工人在制造业和建筑业中发挥关键作用。",
+            "许多年轻创业者选择经营自己的生意，而非为企业打工。",
+            "她通过为小企业提供咨询服务谋生。",
+            "该公司赞助环保项目以提升公众形象。",
+            "投资数字营销是数字时代拓展业务的有效方式。",
+            "产品设计创新帮助企业获得超越竞争对手的优势。",
+            "企业常通过优化供应链在降低成本的同时最大化利润。",
+            "诚信经营业务对建立客户信任至关重要。",
+            "公司重组计划后，50名员工被裁员。",
+            "该公司为长期服务的员工提供慷慨的养老金计划。"
+        ];
+
+        //运动类翻译句子
+        const sportSentences = [
+            "许多人在意识到规律体育活动的益处后，决定开始从事运动。",
+            "她开始每天早上慢跑，为即将到来的马拉松健身塑形。",
+            "骑自行车上班是无需额外花时间锻炼就能保持健康的好方法。",
+            "运动员必须在训练中努力锻炼，以提升自己的表现。",
+            "他每周在健身房锻炼三次，以增强肌肉力量。",
+            "经过数月的不活动，他身体状况不佳，爬楼梯都很吃力。",
+            "这位网球运动员在大满贯赛前处于最佳状态。",
+            "医生建议老年人进行瑜伽或散步等轻度锻炼。",
+            "普拉提和太极是关节有问题人群的流行替代锻炼方式。",
+            "一些国家因高受伤率，试图取缔翼装飞行等危险运动。",
+            "在发布强风暴预警后，该活动出于安全考虑被取消。",
+            "与个人运动相比，橄榄球等接触性运动有高受伤概率。",
+            "这位登山者从悬崖坠落，遭受了危及生命的 injuries。",
+            "在夏威夷冲浪巨浪因风险高，被视为极限运动。",
+            "头盔和护膝是滑板爱好者的必备运动装备。",
+            "徒步旅行者应采取携带急救包、查看天气预报等合理预防措施。",
+            "团队运动帮助孩子在学习合作的同时培养竞争精神。",
+            "奥林匹克精神强调全球运动员之间的友谊、尊重与卓越。",
+            "不惜一切代价获胜的态度可能导致运动员使用不道德手段获取优势。",
+            "这位跑步者因违禁物质检测呈阳性，被取消参赛资格。",
+            "在职业体育中，使用兴奋剂被严格禁止。",
+            "这位自行车手在环法自行车赛中未通过药检，面临两年禁赛。",
+            "使用非法物质的运动员可能损害健康并毁掉职业生涯。",
+            "一些父母过度重视体育，给孩子施加过大的获胜压力。",
+            "作为体育迷，她从不错过观看自己最喜欢的足球队比赛。",
+            "这位游泳运动员在16岁时成为首位创造100米自由泳纪录的人。",
+            "该电视频道对奥运会等国际赛事提供广泛的体育报道。",
+            "体育评论员常在现场比赛中提供专业分析和见解。",
+            "体育商品销售包括向球迷出售球队球衣、帽子和其他品牌产品。",
+            "顶级运动员常通过体育用品品牌代言赚取数百万收入。"
+            ];
+
+        //太空类翻译句子
+        const cosmosSentences = [
+            "20世纪60年代，美国和苏联在太空竞赛中竞争激烈。",
+            "一枚太空探测器被送往火星收集土壤样本用于科学分析。",
+            "1969年7月，阿波罗11号登月舱成功登陆月球表面。",
+            "上周，一颗新的通信卫星由可重复使用火箭送入轨道。",
+            "过去二十年，中国在载人航天飞行领域取得了显著里程碑式成就。",
+            "美国国家航空航天局计划2024年发射一枚太空火箭前往木星的卫星木卫二。",
+            "天文学家使用强大的望远镜观测宇宙中的遥远星系。",
+            "许多发达国家投入大量资金进行太空研究以获取技术优势。",
+            "新航天飞机顺利完成首次无人试飞，未出现任何技术问题。",
+            "航天飞机曾定期将宇航员和货物送往国际空间站。",
+            "国际空间站自2000年以来一直由宇航员持续驻守。",
+            "长时间太空航行需要先进的生命支持系统来维持宇航员的生存。",
+            "维珍银河等公司旨在让普通公民能够参与太空旅游。",
+            "现代望远镜帮助科学家探索太阳系外宇宙的奥秘。",
+            "该机构已规划多项无人太空任务以探索遥远行星。",
+            "人类对征服太空的追求推动了无数技术创新。",
+            "宇航员的勇气和奉献精神对对科学感兴趣的年轻人是一种激励。",
+            "宇航员必须穿戴航天服和头盔以在太空真空中保护自己。",
+            "真空包装食品对宇航员在长期任务中维持营养至关重要。",
+            "宇航员在太空的失重状态下经常会经历肌肉流失。",
+            "宇航员必须忍受艰难困苦才能完成他们的太空任务。",
+            "宇航员在空间站外时可以在太空中自由漂浮。",
+            "零重力实验帮助科学家研究微重力对生命体的影响。",
+            "卫星技术实现了全球导航和实时天气监测。",
+            "记忆泡沫是美国国家航空航天局太空研究项目的著名衍生技术。",
+            "私营企业正努力使太空旅行对普通人具有商业可行性。",
+            "在太空寻找新家园的探索是人类文明的长期目标。",
+            "科学家正在火星和其他行星上寻找外星生命形式的迹象。",
+            "地外生命的存在仍然是科学上最大的谜团之一。",
+            "星际殖民曾经只存在于科幻领域，但现在正被探索。"
+        ];
+
+        //全球化类翻译句子
+        const globalizationSentences = [
+            "全球化将世界各地的经济和文化联系在一起。",
+            "国际贸易使各国能够获得本地无法生产的商品。",
+            "学生交换项目促进国家间的文化交流。",
+            "联合国在全球治理中发挥关键作用。",
+            "跨国公司在全球多个国家开展业务。",
+            "各国必须加强国际合作以应对疫情。",
+            "自由贸易协定降低签署国之间的关税。",
+            "跨文化沟通技能对全球专业人士至关重要。",
+            "教育应培养年轻人的全球公民意识。",
+            "数字平台通过连接全球买卖双方促进全球贸易。",
+            "世界各国领导人每年会晤以应对气候变化问题。",
+            "简化的签证规则便利了科技领域的跨境投资。",
+            "调解努力有助于和平解决外交争端。",
+            "国际组织提供援助以支持发展中国家。",
+            "5G技术将增强偏远地区的全球连通性。",
+            "非政府组织在全球范围内努力保护弱势群体的人权。",
+            "世界贸易组织帮助规范国际贸易以确保公平。",
+            "文化节促进不同社区之间的相互理解。",
+            "国际刑警组织与各国合作打击跨国犯罪。",
+            "高层互访有助于改善国家间的外交关系。",
+            "贸易谈判旨在扩大农产品的市场准入。",
+            "可再生能源项目促进农村地区的可持续发展。",
+            "红十字会协调跨境救灾工作。",
+            "关税削减有助于减少贸易伙伴之间的贸易壁垒。",
+            "税收优惠鼓励制造业的外国投资。",
+            "语言培训项目弥合来自不同国家员工之间的文化差距。",
+            "卫生组织努力标准化全球药品安全法规。",
+            "发达国家应与发展中国家分享技术专长。",
+            "认证项目促进咖啡农的公平贸易实践。",
+            "该地区各国加强跨境医疗合作以应对传染病。"
+        ];
+
+        // 翻译句子映射
+        const topicTranslationData = {
+            education: educationSentences,
+            work: workSentences,
+            environment: environmentSentences,            
+            culture: cultureSentences,           
+            health: healthSentences,
+            technology:technologySentences,
+            government:governmentSentences,
+            crime:crimeSentences,
+            media:mediaSentences,
+            society:societySentences,
+            business:businessSentences,
+            sport:sportSentences,
+            cosmos:cosmosSentences,
+            globalization:globalizationSentences
+        };
+
+
         // 页面元素
         const vocabularyPage = document.getElementById('vocabulary-page');
         const practicePage = document.getElementById('practice-page');
@@ -624,108 +3741,287 @@
         const practiceTable = document.getElementById('practice-table');
         const translationExercises = document.getElementById('translation-exercises');
         
-        const practiceBtn = document.getElementById('practice-btn');
-        const translationBtn = document.getElementById('translation-btn');
-        const backFromPractice = document.getElementById('back-from-practice');
-        const backFromTranslation = document.getElementById('back-from-translation');
-        const showPracticeAnswers = document.getElementById('show-practice-answers');
-        const showTranslationAnswers = document.getElementById('show-translation-answers');
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        const currentTopicDisplay = document.getElementById('current-topic');
         
-        // 存储用户输入
-        let practiceInputs = Array(30).fill('');
-        let translationInputs = Array(30).fill('');
+        // 当前选中的话题
+        let currentTopicId = 'education';
+
+
+        // 话题名称映射
+        const topicDisplayNames = {
+            education: "Education 教育",
+            work: "Workplace 职场",
+            environment: "Environment 环境",
+            culture: "Culture 文化",
+            health: "Health 健康",
+            technology: "Technology 技术",
+            government: "Government 政府",
+            crime: "Crime 犯罪",
+            media: "Media 媒体",
+            society: "Society 社会",
+            business: "Business 商业",
+            sport: "Sport 体育",
+            cosmos: "Space 太空",
+            globalization: "Globalization 全球化"
+        };
+        
         
         // 初始化页面
         function initPage() {
-            // 生成词汇列表
-            vocabularyList.innerHTML = '';
-            vocabularyData.forEach((item, index) => {
-                const vocabItem = document.createElement('div');
-                vocabItem.className = 'vocabulary-item';
-                vocabItem.innerHTML = `
-                    <div class="expression">${index + 1}. ${item.expression}</div>
-                    <div class="meaning">${item.meaning}</div>
-                    <div class="example">例句: ${item.example}</div>
-                    <div class="translation">翻译: ${item.translation}</div>
-                `;
-                vocabularyList.appendChild(vocabItem);
+            loadTopicData(currentTopicId);
+            
+            // 事件监听
+            document.getElementById('practice-btn').addEventListener('click', () => {
+                showPage(practicePage);
             });
             
-            // 生成默写练习表格
-            practiceTable.innerHTML = '';
-            vocabularyData.forEach((item, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${item.meaning}</td>
-                    <td>
-                        <input type="text" data-index="${index}" placeholder="请输入英文表达">
-                        <div class="result" id="practice-result-${index}"></div>
-                    </td>
-                `;
-                practiceTable.appendChild(row);
+            document.getElementById('translation-btn').addEventListener('click', () => {
+                showPage(translationPage);
             });
             
+            document.getElementById('back-from-practice').addEventListener('click', function() {
+                showVocabularyPage();
+            });
+
+            document.getElementById('back-from-translation').addEventListener('click', function() {
+                showVocabularyPage();
+            });
+
+            document.getElementById('show-practice-answers').addEventListener('click', function() {
+                toggleAnswers(this, 'practice');
+            });
+
+
+        // 新增显示词汇页面函数
+        function showVocabularyPage() {
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // 显示词汇页面
+            vocabularyPage.classList.add('active');
+            
+            // 更新进度条
+            updateProgressBar('vocab-progress', 100);
+        }
+
+        // 修改标签栏点击事件处理
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const topicId = this.dataset.topic;
+                const topicName = this.textContent;
+                
+                // 更新选中状态
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 更新当前主题
+                currentTopicId = topicId;
+                document.getElementById('current-topic').textContent = `主题: ${topicName}`;
+                
+                // 重置按钮状态
+                resetAnswerButtons();  // 这里不再会报错
+                
+                // 加载新话题数据
+                loadTopicData(topicId);
+                
+                // 显示词汇页面
+                showPage(vocabularyPage);
+            });
+        });
+
+        // 1. 在页面初始化的位置，定义toggleAnswers函数
+        function toggleAnswers(button, type) {
+            const data = topicData[currentTopicId] || educationData;
+            const sentences = topicTranslationData[currentTopicId] || educationSentences;
+            
+            if (button.textContent === '显示答案') {
+                // 显示所有正确答案
+                if (type === 'practice') {
+                    data.forEach((item, index) => {
+                        const resultDiv = document.getElementById(`practice-result-${index}`);
+                        if (resultDiv) {
+                            resultDiv.textContent = item.expression;
+                            resultDiv.style.display = 'block';
+                            
+                            // 检查用户答案是否正确
+                            const input = document.querySelector(`#practice-table input[data-index="${index}"]`);
+                            if (input) {
+                                const userAnswer = input.value.trim().toLowerCase();
+                                const correctAnswer = item.expression.toLowerCase();
+                                resultDiv.className = userAnswer === correctAnswer ? 
+                                    'result correct-result' : 'result incorrect-result';
+                            }
+                        }
+                    });
+                } else {
+                    data.forEach((item, index) => {
+                        const answerDiv = document.getElementById(`translation-answer-${index}`);
+                        if (answerDiv) {
+                            answerDiv.textContent = item.example;
+                            answerDiv.style.display = 'block';
+                        }
+                    });
+                }
+                button.textContent = '取消显示';
+            } else {
+                // 隐藏所有答案
+                if (type === 'practice') {
+                    data.forEach((item, index) => {
+                        const resultDiv = document.getElementById(`practice-result-${index}`);
+                        if (resultDiv) resultDiv.style.display = 'none';
+                    });
+                } else {
+                    data.forEach((item, index) => {
+                        const answerDiv = document.getElementById(`translation-answer-${index}`);
+                        if (answerDiv) answerDiv.style.display = 'none';
+                    });
+                }
+                button.textContent = '显示答案';
+            }
+        }
+        
+        // 修改页面显示函数
+        function showPage(page) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            
+            // 显示目标页面
+            page.classList.add('active');
+            
+            // 如果是词汇页面，更新进度条
+            if (page === vocabularyPage) {
+                updateProgressBar('vocab-progress', 100);
+            }
+        }
+    }
+        
+        // 更新主题显示
+        function updateTopicDisplay(topicId) {
+            const displayName = topicDisplayNames[topicId] || topicDisplayNames.education;
+            currentTopicDisplay.textContent = `主题: ${displayName}`;
+        }
+
+        // 在loadTopicData函数之前定义此函数
+        function updateProgressBar(barId, percentage) {
+            const progressBar = document.getElementById(barId);
+            if (progressBar) {
+                progressBar.style.width = `${percentage}%`;
+            }
+        }
+
+                // 新增重置答案按钮函数
+        function resetAnswerButtons() {
+            const practiceBtn = document.getElementById('show-practice-answers');
+            const translationBtn = document.getElementById('show-translation-answers');
+            
+            if (practiceBtn) {
+                practiceBtn.textContent = '显示答案';
+            }
+            if (translationBtn) {
+                translationBtn.textContent = '显示答案';
+            }
+            
+            // 隐藏所有答案
+            document.querySelectorAll('.result, .sentence-answer').forEach(el => {
+                el.style.display = 'none';
+            });
+        }
+
+        // 修改翻译练习生成逻辑
+        function loadTopicData(topicId) {
+            const data = topicData[topicId] || educationData;
+            const sentences = topicTranslationData[topicId] || educationSentences;
+            
+            
+        // 生成词汇列表
+        vocabularyList.innerHTML = '';
+        data.forEach((item, index) => {
+            const vocabItem = document.createElement('div');
+            vocabItem.className = 'vocabulary-item';
+            vocabItem.innerHTML = `
+                <div class="expression">${index + 1}. ${item.expression}</div>
+                <div class="meaning">${item.meaning}</div>
+                <div class="example">例句: ${item.example}</div>
+                <div class="translation">翻译: ${item.translation}</div>
+            `;
+            vocabularyList.appendChild(vocabItem);
+        });
+        
+        // 生成默写练习表格
+        practiceTable.innerHTML = '';
+        data.forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${item.meaning}</td>
+                <td>
+                    <input type="text" data-index="${index}" placeholder="请输入英文表达">
+                    <div class="result" id="practice-result-${index}"></div>
+                </td>
+            `;
+            practiceTable.appendChild(row);
+        });
+        
             // 生成翻译练习
             translationExercises.innerHTML = '';
-            translationSentences.forEach((sentence, index) => {
+            sentences.forEach((sentence, index) => {
                 const sentenceItem = document.createElement('div');
                 sentenceItem.className = 'sentence-item';
                 sentenceItem.innerHTML = `
                     <div class="sentence-prompt">${index + 1}. ${sentence}</div>
                     <textarea class="sentence-input" data-index="${index}" placeholder="请输入英文翻译"></textarea>
-                    <div class="sentence-answer" id="translation-answer-${index}"></div>
+                    <div class="sentence-actions">
+                        <button class="show-answer-btn" data-index="${index}" onclick="toggleSingleAnswer(this)">显示答案</button>
+                    </div>
+                    <div class="sentence-answer" id="translation-answer-${index}" style="display: none;"></div>
                 `;
                 translationExercises.appendChild(sentenceItem);
             });
+        
+        
+            // 添加翻译练习答案点击事件
+            document.querySelectorAll('.show-answer').forEach(span => {
+                span.addEventListener('click', function() {
+                    const index = this.dataset.index;
+                    const answerDiv = document.getElementById(`translation-answer-${index}`);
+                    const data = topicData[currentTopicId] || educationData;
+                    
+                    if (this.textContent === '显示答案') {
+                        answerDiv.textContent = data[index].example;
+                        answerDiv.style.display = 'block';
+                        this.textContent = '取消显示';
+                    } else {
+                        answerDiv.style.display = 'none';
+                        this.textContent = '显示答案';
+                    }
+                });
+            });
             
-            // 更新进度条
+        // 更新进度条
             updateProgressBar('vocab-progress', 100);
             updateProgressBar('practice-progress', 0);
             updateProgressBar('translation-progress', 0);
+    }
             
-            // 恢复保存的输入
-            restoreInputs();
-        }
-        
-        // 更新进度条
-        function updateProgressBar(barId, percentage) {
-            const progressBar = document.getElementById(barId);
-            progressBar.style.width = `${percentage}%`;
-        }
-        
-        // 保存用户输入
-        function saveInputs() {
-            // 保存默写练习输入
-            const practiceInputElements = document.querySelectorAll('#practice-table input');
-            practiceInputElements.forEach((input, index) => {
-                practiceInputs[index] = input.value;
-            });
+        // 添加单个句子答案显示/隐藏函数
+        function toggleSingleAnswer(button) {
+            const index = button.dataset.index;
+            const data = topicData[currentTopicId] || educationData;
+            const answerDiv = document.getElementById(`translation-answer-${index}`);
             
-            // 保存翻译练习输入
-            const translationInputElements = document.querySelectorAll('.sentence-input');
-            translationInputElements.forEach((input, index) => {
-                translationInputs[index] = input.value;
-            });
-        }
-        
-        // 恢复保存的输入
-        function restoreInputs() {
-            // 恢复默写练习输入
-            const practiceInputElements = document.querySelectorAll('#practice-table input');
-            practiceInputElements.forEach((input, index) => {
-                if (practiceInputs[index]) {
-                    input.value = practiceInputs[index];
+            if (button.textContent === '显示答案') {
+                if (data[index] && data[index].example) {
+                    answerDiv.textContent = data[index].example;
+                    answerDiv.style.display = 'block';
+                    button.textContent = '取消显示';
                 }
-            });
-            
-            // 恢复翻译练习输入
-            const translationInputElements = document.querySelectorAll('.sentence-input');
-            translationInputElements.forEach((input, index) => {
-                if (translationInputs[index]) {
-                    input.value = translationInputs[index];
-                }
-            });
+            } else {
+                answerDiv.style.display = 'none';
+                button.textContent = '显示答案';
+            }
         }
         
         // 显示页面
@@ -733,108 +4029,11 @@
             vocabularyPage.classList.remove('active');
             practicePage.classList.remove('active');
             translationPage.classList.remove('active');
-            
             page.classList.add('active');
         }
         
-        // 事件监听
-        practiceBtn.addEventListener('click', () => {
-            saveInputs();
-            showPage(practicePage);
-        });
-        
-        translationBtn.addEventListener('click', () => {
-            saveInputs();
-            showPage(translationPage);
-        });
-        
-        backFromPractice.addEventListener('click', () => {
-            saveInputs();
-            showPage(vocabularyPage);
-        });
-        
-        backFromTranslation.addEventListener('click', () => {
-            saveInputs();
-            showPage(vocabularyPage);
-        });
-        
-        showPracticeAnswers.addEventListener('click', function() {
-            if (this.textContent === '显示答案') {
-                // 显示所有正确答案
-                vocabularyData.forEach((item, index) => {
-                    const resultDiv = document.getElementById(`practice-result-${index}`);
-                    resultDiv.textContent = item.expression;
-                    resultDiv.style.display = 'block';
-                    
-                    // 检查用户答案是否正确
-                    const userAnswer = document.querySelector(`#practice-table input[data-index="${index}"]`).value.trim().toLowerCase();
-                    const correctAnswer = item.expression.toLowerCase();
-                    
-                    if (userAnswer === correctAnswer) {
-                        resultDiv.className = 'result correct-result';
-                    } else {
-                        resultDiv.className = 'result incorrect-result';
-                    }
-                });
-                this.textContent = '取消显示';
-            } else {
-                // 隐藏所有答案
-                vocabularyData.forEach((item, index) => {
-                    const resultDiv = document.getElementById(`practice-result-${index}`);
-                    resultDiv.style.display = 'none';
-                });
-                this.textContent = '显示答案';
-            }
-        });
-        
-        showTranslationAnswers.addEventListener('click', function() {
-            if (this.textContent === '显示答案') {
-                // 显示所有正确答案
-                vocabularyData.forEach((item, index) => {
-                    const answerDiv = document.getElementById(`translation-answer-${index}`);
-                    answerDiv.textContent = item.example;
-                    answerDiv.style.display = 'block';
-                });
-                this.textContent = '取消显示';
-            } else {
-                // 隐藏所有答案
-                vocabularyData.forEach((item, index) => {
-                    const answerDiv = document.getElementById(`translation-answer-${index}`);
-                    answerDiv.style.display = 'none';
-                });
-                this.textContent = '显示答案';
-            }
-        });
-        
         // 初始化页面
-        initPage();
-
-        // 添加触摸事件支持
-        document.addEventListener('DOMContentLoaded', function() {
-            // 使按钮在移动设备上有更好的触摸反馈
-            const buttons = document.querySelectorAll('button');
-            buttons.forEach(button => {
-                button.addEventListener('touchstart', function() {
-                    this.style.transform = 'scale(0.98)';
-                });
-                button.addEventListener('touchend', function() {
-                    this.style.transform = 'scale(1)';
-                });
-            });
-            
-            // 调整输入框在移动设备上的体验
-            const inputs = document.querySelectorAll('input, textarea');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    if (window.innerWidth < 768) {
-                        setTimeout(() => {
-                            this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }, 300);
-                    }
-                });
-            });
-        });
+        document.addEventListener('DOMContentLoaded', initPage);
     </script>
 </body>
-
 </html>
